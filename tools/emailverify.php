@@ -30,7 +30,7 @@ if ($_POST['submit'] && isset($_POST['username']) && !empty($_POST['username']) 
     //reCAPTCHA
     /*require_once "recaptchalib.php";
 
-    $secret = "6LeY7w4TAAAAADTLNdrOntc94HIo7k93OljjIJPN";
+    $secret = no you cant see it.
     $response = null;
     $reCaptcha = new ReCaptcha($secret);
 
