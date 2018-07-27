@@ -6,7 +6,7 @@ var http = require('http');
 MongoClient.connect(url, function(err, db) {
   if (err) throw err;
   var testdb = db.db("testdb");
-  testdb.collection("users").findOne({}, function(err, result) {
+  testdb.collection("users").find({}, function(err, result) {
     if (err) throw err;
     http.createServer(function (req, res) {
         res.writeHead(200, {'Content-Type': 'text/html'});
