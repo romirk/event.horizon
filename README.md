@@ -6,7 +6,7 @@
 ```
 {
   "success": true,
-  "lists": [
+  "users": [
     {
       "status": <int>,
       "_id": <id>,
