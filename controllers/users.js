@@ -26,12 +26,13 @@ const user = require('../models/user');
 
 //GET HTTP method to /bucketlist
 router.get('/',(req,res) => {
+    console.log(`GET`);
     user.getAll((err, lists)=> {
         if(err) {
             res.json({success:false, message: `Failed to load all lists. Error: ${err}`});
         }
         else {
-            res.write(JSON.stringify({success: true, lists:lists},null,2));
+            res.write(JSON.stringify({success: true, users:lists},null,2));
             res.end();
 
     }
@@ -47,6 +48,7 @@ router.post('/', (req,res,next) => {
         sec: req.body.sec,
         status: req.body.status
     });
+    console.log(`REG ${newUser}`);
     user.register(newUser,(err, list) => {
         if(err) {
             res.json({success: false, message: `Failed to create a new user. Error: ${err}\n${newUser}`});
@@ -63,6 +65,7 @@ router.post('/', (req,res,next) => {
 router.delete('/:id', (req,res,next)=> {
   //access the parameter which is the id of the item to be deleted
     let id = req.params.id;
+    console.log(`DELETE ${id}`);
   //Call the model method deleteListById
     user.delete(id,(err,u) => {
         if(err) {

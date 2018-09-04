@@ -44,5 +44,5 @@ module.exports.register = (newUser, callback) => {
 //Here we need to pass an id parameter to BUcketList.remove
 module.exports.delete = (id, callback) => {
     let query = {_id: id};
-    User.remove(query, callback);
+    User.deleteOne(query, callback);
 }
