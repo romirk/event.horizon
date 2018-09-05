@@ -9,7 +9,8 @@ const UserSchema = mongoose.Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     pass: {
         type: String,
@@ -27,6 +28,11 @@ const UserSchema = mongoose.Schema({
         type: Number,
         required: true,
         default:2
+    },
+    username: {
+        type: String,
+        required: true,
+        unique: true
     }
 });
 

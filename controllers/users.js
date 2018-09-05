@@ -5,33 +5,15 @@ const bodyParser = require('body-parser');
 
 router.use(bodyParser.urlencoded({extended:true}));
 router.use(bodyParser.json());
-// //GET HTTP method to /bucketlist
-// router.get('/',(req,res) => {
-//     res.send("GET");
-// });
-
-//POST HTTP method to /bucketlist
-
-// router.post('/', (req,res,next) => {
-//     res.send("POST");
-// });
-
-// //DELETE HTTP method to /bucketlist. Here, we pass in a params which is the object id.
-// router.delete('/:id', (req,res,next)=> {
-//     res.send("DELETE");
-
-// });
-
 const user = require('../models/user');
 
-//GET HTTP method to /bucketlist
-router.get('/:id?',(req,res) => {
-    let id = req.params.id;
-    console.log(`GET ${id}`);
-    if(typeof id === 'undefined'){
+router.get('/:un?',(req,res) => {
+    let uname = req.params.un;
+    console.log(`GET ${uname}`);
+    if(typeof uname === 'undefined'){
         user.getAll((err, users)=> {
             if(err) {
-                res.json({success:false, message: `Failed to load all lists. Error: ${err}`});
+                res.json({success:false, message: `Failed to load users. Error: ${err}`});
             }
             else {
                 res.json({success: true, users:users});
@@ -40,9 +22,12 @@ router.get('/:id?',(req,res) => {
             }
         });    
     } else {
-        user.get({_id: id}, (err, u) => {
+        user.get({username: uname}, (err, u) => {
             if(err) {
-                res.json({success:false, message: `Failed to load all lists. Error: ${err}`});
+                res.json({success:false, message: `Failed to load users. Error: ${err}`});
+            }
+            else if(!u) {
+                res.json({success:false, message: `Failed to load users. Error: No user with username ${uname}`});
             }
             else {
                 res.json({success: true, users:u});
@@ -59,7 +44,8 @@ router.post('/', (req,res,next) => {
         pass: req.body.pass,
         grade: req.body.grade,
         sec: req.body.sec,
-        status: req.body.status
+        status: req.body.status,
+        username: req.body.username
     });
     console.log(`REG ${newUser}`);
     user.register(newUser,(err, list) => {
@@ -73,16 +59,14 @@ router.post('/', (req,res,next) => {
     });
 });
 
-//DELETE HTTP method to /bucketlist. Here, we pass in a param which is the object id.
-
 router.delete('/:id', (req,res,next)=> {
   //access the parameter which is the id of the item to be deleted
     let id = req.params.id;
     console.log(`DELETE ${id}`);
-  //Call the model method deleteListById
+  //Call the model method delete
     user.delete(id,(err,u) => {
         if(err) {
-            res.json({success:false, message: `Failed to delete the list. Error: ${err}`});
+            res.json({success:false, message: `Failed to delete the user. Error: ${err}`});
         }
         else if(u) {
             res.json({success:true, message: "Deleted successfully"});
