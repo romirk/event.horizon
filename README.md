@@ -1,6 +1,6 @@
 # cisco-npskrm
 ## API
-### ```GET /user```
+### ```GET /user/:id```
 
 **Success**
 ```
