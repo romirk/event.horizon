@@ -4,7 +4,13 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const config = require('./config/database');
-mongoose.connect(config.database);
+mongoose.createConnection(config.database, function() {console.log(mongoose);});
+mongoose.connection.on('open', () => {
+    console.log('Connected to mongodb server.');
+    mongoose.connection.db.listCollections().toArray(function (err, names) {
+      console.log(names);
+     });
+  })
 const users = require('./controllers/users');
 
 //Initialize our app variable

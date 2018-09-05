@@ -27,12 +27,13 @@ const user = require('../models/user');
 //GET HTTP method to /bucketlist
 router.get('/',(req,res) => {
     console.log(`GET`);
-    user.getAll((err, lists)=> {
+    user.getAll((err, users)=> {
         if(err) {
             res.json({success:false, message: `Failed to load all lists. Error: ${err}`});
         }
         else {
-            res.write(JSON.stringify({success: true, users:lists},null,2));
+            res.json({success: true, users:users});
+            //res.write(JSON.stringify({success: true, users:lists},null,2));
             res.end();
 
     }
