@@ -36,6 +36,9 @@ const User = module.exports = mongoose.model('User', UserSchema);
 module.exports.getAll = (callback) => {
     User.find(callback);
 }
+module.exports.get = (q, callback) => {
+    User.findOne(q, callback);
+}
 //newList.save is used to insert the document into MongoDB
 module.exports.register = (newUser, callback) => {
     newUser.save(callback);

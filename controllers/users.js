@@ -25,19 +25,31 @@ router.use(bodyParser.json());
 const user = require('../models/user');
 
 //GET HTTP method to /bucketlist
-router.get('/',(req,res) => {
-    console.log(`GET`);
-    user.getAll((err, users)=> {
-        if(err) {
-            res.json({success:false, message: `Failed to load all lists. Error: ${err}`});
-        }
-        else {
-            res.json({success: true, users:users});
-            //res.write(JSON.stringify({success: true, users:lists},null,2));
-            res.end();
-
+router.get('/:id?',(req,res) => {
+    let id = req.params.id;
+    console.log(`GET ${id}`);
+    if(typeof id === 'undefined'){
+        user.getAll((err, users)=> {
+            if(err) {
+                res.json({success:false, message: `Failed to load all lists. Error: ${err}`});
+            }
+            else {
+                res.json({success: true, users:users});
+                //res.write(JSON.stringify({success: true, users:lists},null,2));
+                res.end();
+            }
+        });    
+    } else {
+        user.get({_id: id}, (err, u) => {
+            if(err) {
+                res.json({success:false, message: `Failed to load all lists. Error: ${err}`});
+            }
+            else {
+                res.json({success: true, users:u});
+                res.end();
+            }
+        });
     }
-    });
 });
 
 router.post('/', (req,res,next) => {
