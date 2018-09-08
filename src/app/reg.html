@@ -1,7 +1,8 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+  <html>
     <head>
         <meta charset="utf-8">
-        <title>viv.um</title>
+        <title>Register</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="assets\css\bootstrap.min.css">
@@ -19,50 +20,61 @@
     <style>
       .container{
         text-align:center;
+        margin: auto;
+        padding-top: 20px;
       }
     </style>
     <div class="container">
-      <h1>Register</h1>
-      <P></P>
-      <form method="post" action="http://localhost:3000/user/">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input class="mdl-textfield__input" type="text" id="u" name="username" maxlength="50">
-          <label class="mdl-textfield__label" for="u">Username</label>
+      
+      <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
+            <div style="margin: auto; padding: 25px "><h1>Register</h1></div>
+          </div>
+          <div class="mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet"> <form method="post" action="http://localhost:3000/user/">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="u" name="username" maxlength="50">
+              <label class="mdl-textfield__label" for="u">Username</label>
+            </div>
+            <br>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="password" id="p" name="pass" maxlength="50">
+              <label class="mdl-textfield__label" for="p">Password</label>
+            </div>
+            <br>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="password" id="pc" name="passwordc" maxlength="50">
+              <label class="mdl-textfield__label" for="pc">Confirm Password</label>
+            </div>
+            <br>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="email" id="e" name="email" maxlength="50">
+              <label class="mdl-textfield__label" for="f">Email</label>
+            </div>
+            <br>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="f" name="name" maxlength="50">
+              <label class="mdl-textfield__label" for="f">Full Name</label>
+            </div>
+            <br>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="number" id="g" name="grade" maxlength="2" size="2" min="1" max="12">
+              <label class="mdl-textfield__label" for="g">Grade</label>
+            </div>
+            <br>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="s" name="sec" maxlength="1" size="1">
+              <label class="mdl-textfield__label" for="s">Section</label>
+            </div>
+            <br>
+            <p></p>
+            <!-- <input type="submit" name="submit" value="Register" class="btn btn-success btn-block d" /> -->
+            <input type="submit" value="Register" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+            <button class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--accent" onclick='window.location.replace("/")'>CANCEL</button>
+          </form>
         </div>
-        <br>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input class="mdl-textfield__input" type="password" id="p" name="pass" maxlength="50">
-          <label class="mdl-textfield__label" for="p">Password</label>
+        <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
+         
         </div>
-        <br>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input class="mdl-textfield__input" type="password" id="pc" name="passwordc" maxlength="50">
-          <label class="mdl-textfield__label" for="pc">Confirm Password</label>
-        </div>
-        <br>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input class="mdl-textfield__input" type="email" id="e" name="email" maxlength="50">
-          <label class="mdl-textfield__label" for="f">Email</label>
-        </div>
-        <br>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input class="mdl-textfield__input" type="text" id="f" name="name" maxlength="50">
-          <label class="mdl-textfield__label" for="f">Full Name</label>
-        </div>
-        <br>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input class="mdl-textfield__input" type="number" id="g" name="grade" maxlength="2" size="2" min="1" max="12">
-          <label class="mdl-textfield__label" for="g">Grade</label>
-        </div>
-        <br>
-       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input class="mdl-textfield__input" type="text" id="s" name="sec" maxlength="1" size="1">
-          <label class="mdl-textfield__label" for="s">Section</label>
-        </div>
-        <br>
-        <p></p>
-        <!-- <input type="submit" name="submit" value="Register" class="btn btn-success btn-block d" /> -->
-        <input type="submit" value="Register" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-        <button class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--accent" onclick='window.location.replace("/")'> CANCEL</button>
+      </div>
     </body>
   </html>
