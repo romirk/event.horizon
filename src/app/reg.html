@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+  <html>
+
+  <head>
+    <meta charset="utf-8">
+    <title>Register</title>
+    <meta name="description" content="A website for random stuff">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-signin-scope" content="profile email">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href="http://www.imagifight.in/w3.css" rel="stylesheet" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link href="http://www.imagifight.in/favicon.ico" rel="shortcut icon">
+    <meta property="og:image" content="http://www.imagifight.in/favicon.ico" />
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+  </head>
+
+  <body>
+    <style>
+      body {
+        background-color: #222222;
+        color: #555555;
+      }
+      .form-control {
+        background-color: #666666 !important;
+        color: white;
+      }
+    </style>
+    <div class="container">
+      <center>
+          <h1 style="color:#fefefe;">Register</h1>
+      </center>
+      <P></P>
+      <form method="post" action="http://localhost:3000/user/">
+        <div class="form-group">
+          <label for="y"><span class="glyphicon glyphicon-user"></span> Username</label>
+          <input type="text" name="username" placeholder="Username" class="form-control" id="y" required="true" maxlength="30" autocomplete="off" />
+          <br />
+        </div>
+        <div class="form-group">
+          <label for="z"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+          <input type="password" name="password" placeholder="Password" class="form-control" id="z" required="true" maxlength="30" autocomplete="off" />
+        </div>
+        <div class="form-group">
+          <label for="p"><span class="glyphicon glyphicon-eye-open"></span> Confirm Password</label>
+          <input type="password" name="passwordc" placeholder="Confirm Password" class="form-control" id="p" required="true" maxlength="30" autocomplete="off" />
+        </div>
+        <div class="form-group">
+          <label for="f">Full Name</label>
+          <input type="text" name="name" placeholder="Name" class="form-control" id="f" required="true" maxlength="30" autocomplete="off" />
+          <br />
+        </div>
+        <div class="form-group">
+          <label for="e"><span class="glyphicon glyphicon-email"></span> Email</label>
+          <input type="email" name="email" placeholder="email" class="form-control" id="e" required="true" maxlength="50" autocomplete="off" />
+          <br />
+        </div>
+        <p></p>
+        <input type="submit" name="submit" value="Register" class="btn btn-success btn-block d" />
+      </form>
+  </body>
+
+  </html>
