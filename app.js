@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const config = require('./config/database');
-mongoose.connect(config.database);
+mongoose.connect(config.database, {useNewUrlParser: true});
 
 const users = require('./controllers/users');
 
