@@ -1,7 +1,7 @@
 //Require mongoose package
 const mongoose = require('mongoose');
 
-//Define BucketlistSchema with title, description and category
+//Define UserSchema with title, description and category
 const UserSchema = mongoose.Schema({
     name: {
         type: String,
@@ -27,7 +27,7 @@ const UserSchema = mongoose.Schema({
     status: {
         type: Number,
         required: true,
-        default:2
+        default: 2
     },
     username: {
         type: String,
@@ -38,20 +38,18 @@ const UserSchema = mongoose.Schema({
 
 const User = module.exports = mongoose.model('User', UserSchema);
 
-//BucketList.find() returns all the lists
 module.exports.getAll = (callback) => {
     User.find(callback);
 }
 module.exports.get = (q, callback) => {
     User.findOne(q, callback);
 }
-//newList.save is used to insert the document into MongoDB
+
 module.exports.register = (newUser, callback) => {
     newUser.save(callback);
 }
 
-//Here we need to pass an id parameter to BUcketList.remove
 module.exports.delete = (id, callback) => {
-    let query = {_id: id};
+    let query = { _id: id };
     User.deleteOne(query, callback);
 }

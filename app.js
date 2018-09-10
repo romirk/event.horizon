@@ -4,15 +4,14 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const config = require('./config/database');
-mongoose.connect(config.database, {useNewUrlParser: true});
+mongoose.connect(config.database, { useNewUrlParser: true });
 
 const users = require('./controllers/users');
 
 //Initialize our app variable
 const app = express();
 
-//Routing all HTTP requests to /bucketlist to bucketlist controller
-app.use('/user',users);
+app.use('/user', users);
 
 //Declaring Port
 const port = 3000;
@@ -21,7 +20,7 @@ const port = 3000;
 app.use(cors());
 
 //Middleware for bodyparsing using both json and urlencoding
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 /*express.static is a built in middleware function to serve static files.
@@ -29,7 +28,7 @@ app.use(bodyParser.json());
 */
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req,res) => {
+app.get('/', (req, res) => {
     res.send("Invalid page");
 });
 

@@ -17,7 +17,7 @@ router.get('/:un?',(req,res) => {
             }
             else {
                 res.json({success: true, users:users});
-                //res.write(JSON.stringify({success: true, users:lists},null,2));
+                //res.write(JSON.stringify({success: true, users:users},null,2));
                 res.end();
             }
         });    

@@ -1,80 +1,84 @@
 <!DOCTYPE html>
-  <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Register</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    </head>
+<html>
 
-  <body>
-    <style>
-      body {
-        font-family: 'Raleway';
-        
-      }
-      .container{
-        /*text-align:center;*/
-        min-height: 100vh;
-        width: 100vw;
-        margin: auto;
-        border-left: 5vw solid rgb(63,81,181);
-        padding-top: 10vh;
-      }
-    </style>
-    <div class="container" style="margin: auto;">
-      
-      <div class="mdl-grid">
-          <div class="mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet" style="margin: auto;">
-            <div><h1>Register</h1></div>
-          </div>
-          <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet"> <form method="post" action="http://localhost:3000/user/">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="text" id="u" name="username" maxlength="50">
-              <label class="mdl-textfield__label" for="u">Username</label>
-            </div>
-            <br>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="password" id="p" name="pass" maxlength="50">
-              <label class="mdl-textfield__label" for="p">Password</label>
-            </div>
-            <br>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="password" id="pc" name="passwordc" maxlength="50">
-              <label class="mdl-textfield__label" for="pc">Confirm Password</label>
-            </div>
-            <br>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="email" id="e" name="email" maxlength="50">
-              <label class="mdl-textfield__label" for="f">Email</label>
-            </div>
-            <br>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="text" id="f" name="name" maxlength="50">
-              <label class="mdl-textfield__label" for="f">Full Name</label>
-            </div>
-            <br>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="number" id="g" name="grade" maxlength="2" size="2" min="1" max="12">
-              <label class="mdl-textfield__label" for="g">Grade</label>
-            </div>
-            <br>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="text" id="s" name="sec" maxlength="1" size="1">
-              <label class="mdl-textfield__label" for="s">Section</label>
-            </div>
-            <br>
-            <p></p>
-            <!-- <input type="submit" name="submit" value="Register" class="btn btn-success btn-block d" /> -->
-            <input type="submit" value="Register" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-            <button class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--accent" onclick='window.location.replace("/")'>CANCEL</button>
-          </form>
+<head>
+  <meta charset="utf-8">
+  <title>Register</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+</head>
+
+<body>
+  <style>
+    body {
+      font-family: 'Raleway';
+
+    }
+
+    .container {
+      /*text-align:center;*/
+      min-height: 100vh;
+      width: 100vw;
+      margin: auto;
+      border-left: 5vw solid rgb(63, 81, 181);
+      padding-top: 10vh;
+    }
+  </style>
+  <div class="container" style="margin: auto;">
+    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell--4-col mdl-cell--6-col-tablet" style="margin: auto;">
+        <div>
+          <h1><span style="border-bottom: 5px solid rgb(63, 81, 181); padding-bottom: 4px">Regis</span>ter</h1>
         </div>
       </div>
-    </body>
-  </html>
-  
+      <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
+        <form method="post" action="http://localhost:3000/user/">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="u" name="username" maxlength="50">
+            <label class="mdl-textfield__label" for="u">Username</label>
+          </div>
+          <br>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="password" id="p" name="pass" maxlength="50">
+            <label class="mdl-textfield__label" for="p">Password</label>
+          </div>
+          <br>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="password" id="pc" name="passwordc" maxlength="50">
+            <label class="mdl-textfield__label" for="pc">Confirm Password</label>
+          </div>
+          <br>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="email" id="e" name="email" maxlength="50">
+            <label class="mdl-textfield__label" for="f">Email</label>
+          </div>
+          <br>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="f" name="name" maxlength="50">
+            <label class="mdl-textfield__label" for="f">Full Name</label>
+          </div>
+          <br>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="number" id="g" name="grade" maxlength="2" size="2" min="1" max="12">
+            <label class="mdl-textfield__label" for="g">Grade</label>
+          </div>
+          <br>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="s" name="sec" maxlength="1" size="1">
+            <label class="mdl-textfield__label" for="s">Section</label>
+          </div>
+          <br>
+          <p></p>
+          <!-- <input type="submit" name="submit" value="Register" class="btn btn-success btn-block d" /> -->
+          <input type="submit" value="Register" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+          <button class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--accent" onclick='window.location.replace("/")'>CANCEL</button>
+        </form>
+      </div>
+    </div>
+</body>
+
+</html>
