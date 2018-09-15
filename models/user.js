@@ -25,9 +25,9 @@ const UserSchema = mongoose.Schema({
         required: true
     },
     status: {
-        type: Number,
+        type: String,
         required: true,
-        default: 2
+        default: "user"
     },
     username: {
         type: String,
