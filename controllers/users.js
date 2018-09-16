@@ -9,7 +9,7 @@ const user = require('../models/user');
 
 router.get('/:un?', (req, res) => {
     let uname = req.params.un;
-    console.log(`GET ${uname}`);
+    console.log(`GET\t${uname}`);
     if (typeof uname === 'undefined') {
         user.getAll((err, users) => {
             if (err) {
@@ -49,7 +49,7 @@ router.post('/', (req, res, next) => {
         status: req.body.status,
         username: req.body.username
     });
-    console.log(`REG ${newUser}`);
+    console.log(`REG\t${newUser}`);
     user.register(newUser, (err, u) => {
         if (err) {
             res.json({ success: false, message: `Failed to create a new user. Error: ${err}\n ${newUser}` });
@@ -62,7 +62,7 @@ router.post('/', (req, res, next) => {
 router.delete('/:id', (req, res, next) => {
     //access the parameter which is the id of the item to be deleted
     let id = req.params.id;
-    console.log(`DELETE ${id}`);
+    console.log(`DELETE\t${id}`);
     //Call the model method delete
     user.delete(id, (err, u) => {
         if (err) {
