@@ -8,10 +8,14 @@ const EventSchema = mongoose.Schema({
     },
     date: Date,
     organizers: {
-        type: Array,
+        type: [{
+            type: String
+        }],
         required: true
     },
-    participants: Array,
+    participants: [{
+        type: String
+    }],
     details: String
 });
 
@@ -23,7 +27,7 @@ module.exports.getAll = (callback) => {
 module.exports.get = (q, callback) => {
     Event.findOne(q, callback);
 }
-module.exports.create = (newUser, callback) => {
+module.exports.create = (newEvent, callback) => {
     newEvent.save(callback);
 }
 module.exports.delete = (id, callback) => {

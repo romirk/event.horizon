@@ -55,5 +55,20 @@ router.post('/', (req, res, next) => {
             res.json({ success: true, message: "Added successfully." });
     });
 });
-
+router.delete('/:id', (req, res, next) => {
+    //access the parameter which is the id of the item to be deleted
+    let id = req.params.id;
+    console.log(`DELETE\t${id}`);
+    //Call the model method delete
+    event.delete(id, (err, e) => {
+        if (err) {
+            res.json({ success: false, message: `Failed to delete the user. Error: ${err}` });
+        }
+        else if (e) {
+            res.json({ success: true, message: "Deleted successfully" });
+        }
+        else
+            res.json({ success: false });
+    })
+});
 module.exports = router;
