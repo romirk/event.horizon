@@ -3,7 +3,6 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
 
 const users = require('./controllers/users');
 const events = require('./controllers/events');
@@ -19,8 +18,6 @@ const app = module.exports = express();
 app.use('/user', users);
 app.use('/event', events);
 app.use('/auth', auth);
-
-app.set('SECRET', config.secret);
 
 //Declaring Port
 const port = 3000;
