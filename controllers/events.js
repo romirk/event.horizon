@@ -26,7 +26,7 @@ router.get('/:id?', (req, res) => {
             if (err) {
                 res.json({ success: false, message: `Failed to load events. Error: ${err}` });
             }
-            else if (!u) {
+            else if (!events) {
                 res.json({ success: false, message: `Failed to load events. Error: No event with ID ${id}` });
             }
             else {
