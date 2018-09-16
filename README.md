@@ -4,6 +4,7 @@
 
 **Success**
 ```
+//for multiple users
 {
   "success": true,
   "users": [
@@ -18,6 +19,20 @@
     }
   ]
 }
+
+//for single user
+{
+  "success": true,
+  "user": {
+      "status": <int>,
+      "_id": <id>,
+      "name": <string>,
+      "email": <string>,
+      "pass": <string>,
+      "grade": <int>,
+      "sec": <string>
+    }
+}
 ```
 **Fail**
 ```
@@ -26,11 +41,26 @@
   "message": <string>
 }
 ```
-### ```POST /user```
+### ```POST /user/new```
 ```
 {
   "success": true | false,
   "message": <string>
+}
+```
+### ```POST /user/edit/:id```
+```
+{
+  "success": true | false,
+  "user": {
+    "status": <int>,
+    "_id": <id>,
+    "name": <string>,
+    "email": <string>,
+    "pass": <string>,
+    "grade": <int>,
+    "sec": <string>
+  }
 }
 ```
 ### ```DELETE /user/:id```

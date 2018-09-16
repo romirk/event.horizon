@@ -47,6 +47,9 @@ module.exports.get = (q, callback) => {
 module.exports.register = (newUser, callback) => {
     newUser.save(callback);
 }
+module.exports.edit = (conditions, update, callback) => {
+    User.findOneAndUpdate(conditions, update, { new: true }, callback);
+}
 module.exports.delete = (id, callback) => {
     let query = { _id: id };
     User.deleteOne(query, callback);

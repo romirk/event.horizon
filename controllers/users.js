@@ -30,7 +30,7 @@ router.get('/:un?', (req, res) => {
                 res.json({ success: false, message: `Failed to load users. Error: No user with username ${uname}` });
             }
             else {
-                res.json({ success: true, users: u });
+                res.json({ success: true, user: u });
                 res.end();
             }
         });
@@ -39,7 +39,7 @@ router.get('/:un?', (req, res) => {
 /*var token = jwt.sign(payload, app.get('superSecret'), {
           expiresInMinutes: 1440 // expires in 24 hours
         });*/
-router.post('/', (req, res, next) => {
+router.post('/new', (req, res) => {
     let newUser = new user({
         name: req.body.name,
         email: req.body.email,
@@ -59,7 +59,24 @@ router.post('/', (req, res, next) => {
 
     });
 });
-router.delete('/:id', (req, res, next) => {
+router.post('/edit/:id', (req, res) => {
+    let id = req.params.id;
+    let update = req.body.update;
+    console.log(`UPDATE ${id}`);
+    user.edit({ _id: id }, update, (err, updatedUser) => {
+        if (err) {
+            res.json({ success: false, message: `Failed to update user. Error: ${err}\n ${update}` });
+        }
+        else if (!updatedUser) {
+            res.json({ success: false, message: `Failed to update user. Error: No user with id ${id}` });
+        }
+        else {
+            res.json({ success: true, user: updatedUser });
+            res.end();
+        }
+    })
+})
+router.delete('/:id', (req, res) => {
     //access the parameter which is the id of the item to be deleted
     let id = req.params.id;
     console.log(`DELETE\t${id}`);
