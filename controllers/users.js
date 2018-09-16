@@ -50,7 +50,7 @@ router.post('/', (req,res,next) => {
     console.log(`REG ${newUser}`);
     user.register(newUser,(err, u) => {
         if(err) {
-            res.json({success: false, message: `Failed to create a new user. Error: ${err}\n${newUser}`});
+            res.json({success: false, message: `Failed to create a new user. Error: ${err}\n ${newUser}`});
 
         }
         else

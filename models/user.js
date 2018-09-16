@@ -36,7 +36,7 @@ const UserSchema = mongoose.Schema({
     }
 });
 
-const User = module.exports = mongoose.model('User', UserSchema);
+const User = module.exports = mongoose.model('User', UserSchema, 'users');
 
 module.exports.getAll = (callback) => {
     User.find(callback);
@@ -44,11 +44,9 @@ module.exports.getAll = (callback) => {
 module.exports.get = (q, callback) => {
     User.findOne(q, callback);
 }
-
 module.exports.register = (newUser, callback) => {
     newUser.save(callback);
 }
-
 module.exports.delete = (id, callback) => {
     let query = { _id: id };
     User.deleteOne(query, callback);

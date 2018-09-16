@@ -7,11 +7,13 @@ const config = require('./config/database');
 mongoose.connect(config.database, { useNewUrlParser: true });
 
 const users = require('./controllers/users');
+const events = require('./controllers/events');
 
 //Initialize our app variable
 const app = express();
 
 app.use('/user', users);
+app.use('/event', events);
 
 //Declaring Port
 const port = 3000;
