@@ -3,17 +3,24 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const config = require('./config/database');
-mongoose.connect(config.database, { useNewUrlParser: true });
+const jwt = require('jsonwebtoken');
 
 const users = require('./controllers/users');
 const events = require('./controllers/events');
+const config = require('./config/config');
+const auth = require('./controllers/authenticate')
+
+mongoose.connect(config.database, { useNewUrlParser: true });
+
 
 //Initialize our app variable
-const app = express();
+const app = module.exports = express();
 
 app.use('/user', users);
 app.use('/event', events);
+app.use('/auth', auth);
+
+app.set('SECRET', config.secret);
 
 //Declaring Port
 const port = 3000;
@@ -31,7 +38,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-    res.send("Invalid page");
+    res.send("<code>Routes:</code><br><code>\\event<\code><br><code>\\user</code>");
 });
 
 //Listen to port 3000

@@ -6,19 +6,13 @@ const EventSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    date: {
-        type: Date,
-    },
+    date: Date,
     organizers: {
         type: Array,
         required: true
     },
-    participants: {
-        type: Array,
-    },
-    details: {
-        type: String
-    }
+    participants: Array,
+    details: String
 });
 
 const Event = module.exports = mongoose.model('Event', EventSchema, 'events');
