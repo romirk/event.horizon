@@ -1,0 +1,87 @@
+.custom-link{
+	cursor: pointer;
+}
+.to-right{
+	float: right;
+}
+.to-left{
+	float: left;
+}
+.clear-fix{
+	clear: both;
+}
+#left-sidebar{
+	display: none;
+	position: fixed;
+	width: 150px;
+	height: 100%;
+	top: 0;
+	z-index: 20;
+	background-color: #fff;
+	box-shadow: 2px 0 0 rgba(0, 0, 0, 0.08);
+	overflow-y: auto;
+}
+
+.material-group {
+	position: relative; 
+	margin-bottom: 45px; 
+}
+.material-input {
+	font-size: 18px;
+	padding: 10px 10px 10px 5px;
+	display: block;
+	width: 100%;
+	border: none;
+	border-bottom: 1px solid #757575;
+}
+.material-input:focus {
+	outline: none;
+}
+
+.material-label {
+	color: #999; 
+	font-size: 18px;
+	font-weight: normal;
+	position: absolute;
+	pointer-events: none;
+	left: 5px;
+	top: 10px;
+	transition: 0.2s ease all; 
+	-moz-transition: 0.2s ease all; 
+	-webkit-transition: 0.2s ease all;
+}
+
+.material-input:focus ~ label, .material-input:valid ~ label {
+	top: -20px;
+	font-size: 14px;
+	color: #5264AE;
+}
+.date-range-div{
+	margin-top: 30px;
+	height: 300px;
+}
+button.link{
+	margin-right: 10px;
+	float: right;
+}
+.template-selection{
+	padding: 30px;
+}
+.DayPicker {
+	font-size: 16px;
+}
+.Selectable .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
+	background-color: #f0f8ff !important;
+	color: #4a90e2;
+}
+.Selectable .DayPicker-Day {
+	border-radius: 0 !important;
+}
+.Selectable .DayPicker-Day--start {
+	border-top-left-radius: 50% !important;
+	border-bottom-left-radius: 50% !important;
+}
+.Selectable .DayPicker-Day--end {
+	border-top-right-radius: 50% !important;
+	border-bottom-right-radius: 50% !important;
+}
