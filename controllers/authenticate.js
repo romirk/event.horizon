@@ -20,20 +20,21 @@ router.post('/', (req, res) => {
             res.json({ success: false, message: `Authentication failed. Error: No user with username ${req.body.username}` });
         }
         else {
-            if (u.pass != req.body.password)
-                res.json({ success: false, message: `Authentication failed. Error: Incorrect password` });
-            else {
-                const payload = {
-                    username: u.username,
-                    status: u.status
-                };
-                var token = jwt.sign(payload, config.secret, {
-                    expiresIn: 60*60*24 // expires in 24 hours
-                });
-                console.log(`AUTH OK\t${token}`);
-                res.json({ success: true, token: token, message: 'Authentication succeded.' });
-                res.end();
-            }
+            user.auth(u.username, req.body.password, (s, m) => {
+                if(!s) res.json({ success: false, message: m });
+                else {
+                    const payload = {
+                        username: u.username,
+                        status: u.status
+                    };
+                    var token = jwt.sign(payload, config.secret, {
+                        expiresIn: 60*60*24 // expires in 24 hours
+                    });
+                    console.log(`AUTH OK\t${token}`);
+                    res.json({ success: true, token: token, message: 'Authentication succeded.' });
+                    res.end();
+                }
+            });
         }
     })
 });

@@ -87,6 +87,7 @@ module.exports.auth = (username, password, callback) => {
                 });
             }
             await callback(success, message);
+            return success;
         })();
     });
 }
