@@ -70,7 +70,7 @@ module.exports.auth = (username, password, callback) => {
                 message = `Failed to load users. Error: No user with username ${username}`;
             }
             else {
-                await bcrypt.compare(password, u.pass).then((r) => {
+                await bcrypt.compare(password, u.pass).then((r, err) => {
                     console.log("u.pass", u.pass, "password", password, r);
                     if (err) {
                         success = false;

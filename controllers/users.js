@@ -53,7 +53,7 @@ router.post('/new', (req, res) => {
     bcrypt.hash(req.body.pass, 16, function (err, hash) {
         console.log(req.body.email);
         if (err) { throw (err); }
-        if (/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(req.body.email)) {
+        if (/\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/.test(req.body.email)) {
             bcrypt.compare(req.body.pass, hash, function (err, result) {
                 if (err) { throw (err); }
                 let newUser = new user({
