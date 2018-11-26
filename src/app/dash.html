@@ -1,0 +1,200 @@
+<html>
+
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+
+<body>
+    <!-- Uses a transparent header that draws on top of the layout's background -->
+    <style>
+
+        body,
+            h1 {
+                font-family: "Raleway", sans-serif
+            }
+
+            body,
+            html {
+                height: 100%;
+                line-height: 1;
+            }
+
+            .layout-transparent {
+                background:rgb(29, 29, 29) center / cover;
+                background-attachment: fixed;
+            }
+
+            .layout-transparent .mdl-layout__header,
+            .layout-transparent .mdl-layout__drawer-button {
+                /* This background is dark, so we set text to white. Use 87% black instead if
+     your background is light. */
+                color: white;
+            }
+            .title {
+                display: block;
+                padding-top: 160px;
+                padding-left: 5%;
+                min-height: 30%;
+                height: auto !important;
+                text-align: left;
+                margin: auto;
+                border: 1px;
+                /*right: 15%;*/
+                font-size: x-large;
+            }
+    </style>
+    <style>
+        .demo-card-event.mdl-card {
+          width: 256px;
+          height: 256px;
+          background: #3E4EB8;
+        }
+        .demo-card-event > .mdl-card__actions {
+          border-color: rgba(255, 255, 255, 0.2);
+        }
+        .demo-card-event > .mdl-card__title {
+          align-items: flex-start;
+        }
+        .demo-card-event > .mdl-card__title > h4 {
+          margin-top: 0;
+        }
+        .demo-card-event > .mdl-card__actions {
+          display: flex;
+          box-sizing:border-box;
+          align-items: center;
+        }
+        .demo-card-event > .mdl-card__actions > .material-icons {
+          padding-right: 10px;
+        }
+        .demo-card-event > .mdl-card__title,
+        .demo-card-event > .mdl-card__actions,
+        .demo-card-event > .mdl-card__actions > .mdl-button {
+          color: #fff;
+        }
+        </style>
+
+    <div class="layout-transparent mdl-layout mdl-js-layout">
+        <header class="mdl-layout__header mdl-layout__header--transparent">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">
+                    <code style='color:inherit;background-color:inherit;font-size: 110%;'>event.horizon</code>
+                </span>
+                <!-- Add spacer, to align navigation to the right -->
+                <div class="mdl-layout-spacer"></div>
+                <!-- Navigation -->
+                <nav class="mdl-navigation">
+                    <a class="mdl-navigation__link" href="nov5.mp4">Piano</a>
+                    <!--<a class="mdl-navigation__link" href="">Link</a>-->
+                    <!--<a class="mdl-navigation__link" href="">Link</a>-->
+                    <!--<a class="mdl-navigation__link" href="">Link</a>-->
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"
+                        onclick="document.getElementById('id01').style.display='block'">Login</button>
+                </nav>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">
+                <code style='color:inherit;background-color:inherit;'>event.horizon</code>
+            </span>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="nov5.mp4">Piano</a>
+                <!--<a class="mdl-navigation__link" href="">Link</a>-->
+                <a class="mdl-navigation__link" onclick="document.getElementById('id01').style.display='block'" href='javascript:void(0);'>Login</a>
+                <hr>
+                <span style='margin:auto'>
+                    Coded with &hearts; by <a href="http://www.instagram.com/romir.k">romir.k</a>
+                </span>
+            </nav>
+
+        </div>
+        <main class="mdl-layout__content" style="height:100%;">
+            <div class="title" style="padding:5vw 5vh 5vw 5vh;margin:auto;display:block;">
+                <div class="mdl-grid" style="color:white;line-height:1;font-size:130%">
+                    <div class="mdl-cell mdl-cell--3-col " style="color:firebrick"><strong id="days">1,000,000,000</strong>
+                        <br> <code id=d>CHALLENGERS</code></div>
+                    <div class="mdl-cell mdl-cell--3-col" style="color:blueviolet"><strong id="hours">3</strong>
+                        <br> <code id=h>EXPLORERS</code></div>
+                    <div class="mdl-cell mdl-cell--3-col" style="color:orangered"><strong id="minutes">2</strong>
+                        <br><code id=m>PIONEERS</code></div>
+                    <div class="mdl-cell mdl-cell--3-col" style="color:cyan"><strong id="seconds">0.654645</strong>
+                        <br><code id=s>VOYAGERS</code></div>
+                </div>
+                <p></p>
+            </div>
+            <!-- The Modal -->
+            <div class="w3-container">
+                <div id="id01" class="w3-modal">
+                    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+                        <div class="w3-center">
+                            <br>
+                            <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright"
+                                title="Close Modal">×</span>
+                            <img src="/assets/imgs/img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+                        </div>
+                        <form class="w3-container" action="/auth/" method='post'>
+                            <div class="w3-section">
+                                <label>
+                                    <b>Username</b>
+                                </label>
+                                <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username"
+                                    name="username" required>
+                                <label>
+                                    <b>Password</b>
+                                </label>
+                                <input class="w3-input w3-border" type="password" placeholder="Enter Password" name="password"
+                                    required>
+                                <input class="w3-block w3-green w3-section mdl-button mdl-js-button mdl-js-ripple-effect"
+                                    type="submit" name='submit' value='Login'>
+                                <!--<input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Remember me-->
+                            </div>
+                        </form>
+                        <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+                            <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
+                            <span class="w3-right w3-padding w3-hide-small">
+                                New here? Head to the <a href="auth/register">register page</a>.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-layout mdl-js-layout" style="background-color:rgb(236, 223, 223); padding-left: 1%" id='2'
+                name='2'>
+                <main class="mdl-layout__content">
+                    <div class="mdl-grid">
+                        <div class="mdl-cell mdl-cell--8-col mdl-cell--4-col-phone">
+                            <span style='font-size: 60px;'>this is empty</span>
+                            <br>(shocking, i know)
+                            <div class="demo-card-event mdl-card mdl-shadow--2dp">
+                                <div class="mdl-card__title mdl-card--expand">
+                                    <h4>
+                                        <span class="ename">SomeEvent</span>
+                                        <span class="edate">May 24, 2016</span>
+                                        7-11pm
+                                    </h4>
+                                </div>
+                                <div class="mdl-card__actions mdl-card--border">
+                                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                                        onclick="document.getElementById('id01').style.display='block'">
+                                        Add to Calendar
+                                    </a>
+                                    <div class="mdl-layout-spacer"></div>
+                                    <i class="material-icons">event</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            <footer>
+                <span style="color:white;margin:auto;">Coded with &hearts; by <a href="http://www.instagram.com/romir.k">romir.k</a></span>
+            </footer>
+        </main>
+</body>
+
+</html>

@@ -7,7 +7,7 @@ import DashboardContainer from './components/DashboardContainer'
 import HomeContainer from './components/HomeContainer'
 import StudentDashboardContainer from './components/StudentDashboardContainer'
 
-import './style/App.css';
+import './style/app.css';
 
 export default class App extends Component {
 	constructor(props) {
