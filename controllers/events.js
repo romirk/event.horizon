@@ -16,9 +16,9 @@ router.get('/:id?', (req, res) => {
                 res.json({ success: false, message: `Failed to load users. Error: ${err}` });
             }
             else {
-                res.json({ success: true, events: events });
+                res.status(200).json({ success: true, events: events });
                 //res.write(JSON.stringify({success: true, users:users},null,2));
-                res.end();
+                res.status(200).end();
             }
         });
     } else {
@@ -30,8 +30,8 @@ router.get('/:id?', (req, res) => {
                 res.json({ success: false, message: `Failed to load events. Error: No event with ID ${id}` });
             }
             else {
-                res.json({ success: true, events: events });
-                res.end();
+                res.status(200).json({ success: true, events: events });
+                res.status(200).end();
             }
         });
     }
@@ -52,7 +52,7 @@ router.post('/', (req, res, next) => {
 
         }
         else
-            res.json({ success: true, message: "Added successfully." });
+            res.status(200).json({ success: true, message: "Added successfully." });
     });
 });
 router.delete('/:id', (req, res, next) => {
@@ -65,7 +65,7 @@ router.delete('/:id', (req, res, next) => {
             res.json({ success: false, message: `Failed to delete the user. Error: ${err}` });
         }
         else if (e) {
-            res.json({ success: true, message: "Deleted successfully" });
+            res.status(200).json({ success: true, message: "Deleted successfully" });
         }
         else
             res.json({ success: false });

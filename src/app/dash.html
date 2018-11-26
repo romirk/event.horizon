@@ -12,71 +12,85 @@
 <body>
     <!-- Uses a transparent header that draws on top of the layout's background -->
     <style>
+        body,
+        h1 {
+            font-family: "Raleway", sans-serif
+        }
 
         body,
-            h1 {
-                font-family: "Raleway", sans-serif
-            }
+        html {
+            height: 100%;
+            line-height: 1;
+        }
 
-            body,
-            html {
-                height: 100%;
-                line-height: 1;
-            }
+        .layout-transparent {
+            background: rgb(29, 29, 29) center / cover;
+            background-attachment: fixed;
+        }
 
-            .layout-transparent {
-                background:rgb(29, 29, 29) center / cover;
-                background-attachment: fixed;
-            }
-
-            .layout-transparent .mdl-layout__header,
-            .layout-transparent .mdl-layout__drawer-button {
-                /* This background is dark, so we set text to white. Use 87% black instead if
+        .layout-transparent .mdl-layout__header,
+        .layout-transparent .mdl-layout__drawer-button {
+            /* This background is dark, so we set text to white. Use 87% black instead if
      your background is light. */
-                color: white;
-            }
-            .title {
-                display: block;
-                padding-top: 160px;
-                padding-left: 5%;
-                min-height: 30%;
-                height: auto !important;
-                text-align: left;
-                margin: auto;
-                border: 1px;
-                /*right: 15%;*/
-                font-size: x-large;
-            }
+            color: white;
+        }
+
+        .title {
+            display: block;
+            padding-top: 160px;
+            padding-left: 5%;
+            min-height: 30%;
+            height: auto !important;
+            text-align: left;
+            margin: auto;
+            border: 1px;
+            /*right: 15%;*/
+            font-size: x-large;
+        }
     </style>
     <style>
         .demo-card-event.mdl-card {
-          width: 256px;
-          height: 256px;
-          background: #3E4EB8;
+            width: 256px;
+            height: 256px;
+            background: #3E4EB8;
         }
-        .demo-card-event > .mdl-card__actions {
-          border-color: rgba(255, 255, 255, 0.2);
+
+        .demo-card-event>.mdl-card__actions {
+            border-color: rgba(255, 255, 255, 0.2);
         }
-        .demo-card-event > .mdl-card__title {
-          align-items: flex-start;
+
+        .demo-card-event>.mdl-card__title {
+            align-items: flex-start;
         }
-        .demo-card-event > .mdl-card__title > h4 {
-          margin-top: 0;
+
+        .demo-card-event>.mdl-card__title>h4 {
+            margin-top: 0;
         }
-        .demo-card-event > .mdl-card__actions {
-          display: flex;
-          box-sizing:border-box;
-          align-items: center;
+
+        .demo-card-event>.mdl-card__actions {
+            display: flex;
+            box-sizing: border-box;
+            align-items: center;
         }
-        .demo-card-event > .mdl-card__actions > .material-icons {
-          padding-right: 10px;
+
+        .demo-card-event>.mdl-card__actions>.material-icons {
+            padding-right: 10px;
         }
-        .demo-card-event > .mdl-card__title,
-        .demo-card-event > .mdl-card__actions,
-        .demo-card-event > .mdl-card__actions > .mdl-button {
-          color: #fff;
+
+        .demo-card-event>.mdl-card__title,
+        .demo-card-event>.mdl-card__actions,
+        .demo-card-event>.mdl-card__actions>.mdl-button {
+            color: #fff;
         }
-        </style>
+
+        .pts {
+            font-size: 150%;
+        }
+
+        .h {
+            text-align: right;
+        }
+    </style>
 
     <div class="layout-transparent mdl-layout mdl-js-layout">
         <header class="mdl-layout__header mdl-layout__header--transparent">
@@ -105,7 +119,7 @@
             <nav class="mdl-navigation">
                 <a class="mdl-navigation__link" href="nov5.mp4">Piano</a>
                 <!--<a class="mdl-navigation__link" href="">Link</a>-->
-                <a class="mdl-navigation__link" onclick="document.getElementById('id01').style.display='block'" href='javascript:void(0);'>Login</a>
+                <a class="mdl-navigation__link" onclick="" href='javascript:void(0);'>Login</a>
                 <hr>
                 <span style='margin:auto'>
                     Coded with &hearts; by <a href="http://www.instagram.com/romir.k">romir.k</a>
@@ -114,16 +128,16 @@
 
         </div>
         <main class="mdl-layout__content" style="height:100%;">
-            <div class="title" style="padding:5vw 5vh 5vw 5vh;margin:auto;display:block;">
-                <div class="mdl-grid" style="color:white;line-height:1;font-size:130%">
-                    <div class="mdl-cell mdl-cell--3-col " style="color:firebrick"><strong id="days">1,000,000,000</strong>
-                        <br> <code id=d>CHALLENGERS</code></div>
-                    <div class="mdl-cell mdl-cell--3-col" style="color:blueviolet"><strong id="hours">3</strong>
-                        <br> <code id=h>EXPLORERS</code></div>
-                    <div class="mdl-cell mdl-cell--3-col" style="color:orangered"><strong id="minutes">2</strong>
-                        <br><code id=m>PIONEERS</code></div>
-                    <div class="mdl-cell mdl-cell--3-col" style="color:cyan"><strong id="seconds">0.654645</strong>
-                        <br><code id=s>VOYAGERS</code></div>
+            <div class="title" style="padding:5vw 5vh 4vw 8vh;margin:auto;display:block;">
+                <div class="mdl-grid" style="color:white;line-height:1;">
+                    <div class="mdl-cell mdl-cell--3-col " style="color:firebrick"><strong class="pts">1,000,000,000</strong>
+                        <br> <code class=h>CHALLENGERS</code></div>
+                    <div class="mdl-cell mdl-cell--3-col" style="color:blueviolet"><strong class="pts">3</strong>
+                        <br> <code class=h>EXPLORERS</code></div>
+                    <div class="mdl-cell mdl-cell--3-col" style="color:orangered"><strong class="pts">2</strong>
+                        <br><code class=h>PIONEERS</code></div>
+                    <div class="mdl-cell mdl-cell--3-col" style="color:cyan"><strong class="pts">0.654645</strong>
+                        <br><code class=h>VOYAGERS</code></div>
                 </div>
                 <p></p>
             </div>
@@ -131,33 +145,19 @@
             <div class="w3-container">
                 <div id="id01" class="w3-modal">
                     <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+                        <header class="w3-container" style="background-color:#3e4eb7; color: white;">
+                            <h2 class="eventname">SomeEvent</h2>
+                        </header>
                         <div class="w3-center">
                             <br>
                             <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright"
                                 title="Close Modal">×</span>
-                            <img src="/assets/imgs/img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
                         </div>
-                        <form class="w3-container" action="/auth/" method='post'>
-                            <div class="w3-section">
-                                <label>
-                                    <b>Username</b>
-                                </label>
-                                <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username"
-                                    name="username" required>
-                                <label>
-                                    <b>Password</b>
-                                </label>
-                                <input class="w3-input w3-border" type="password" placeholder="Enter Password" name="password"
-                                    required>
-                                <input class="w3-block w3-green w3-section mdl-button mdl-js-button mdl-js-ripple-effect"
-                                    type="submit" name='submit' value='Login'>
-                                <!--<input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Remember me-->
-                            </div>
-                        </form>
+
                         <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
-                            <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
+                            <!-- <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancel</button> -->
                             <span class="w3-right w3-padding w3-hide-small">
-                                New here? Head to the <a href="auth/register">register page</a>.
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">Register</button>
                             </span>
                         </div>
                     </div>
@@ -168,15 +168,27 @@
                 <main class="mdl-layout__content">
                     <div class="mdl-grid">
                         <div class="mdl-cell mdl-cell--8-col mdl-cell--4-col-phone">
-                            <span style='font-size: 60px;'>this is empty</span>
-                            <br>(shocking, i know)
                             <div class="demo-card-event mdl-card mdl-shadow--2dp">
+                                <!-- Right aligned menu below button -->
+                                <div style="text-align: right; color:white; position: relative; top:3px"><button id="demo-menu-lower-right"
+                                        class="mdl-button mdl-js-button mdl-button--icon">
+                                        <i class="material-icons">more_vert</i>
+                                    </button></div>
+
+                                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-right">
+                                    <li class="mdl-menu__item">Go to page</li>
+                                    <li class="mdl-menu__item">Another Action</li>
+                                    <li disabled class="mdl-menu__item">Edit Event</li>
+                                    <li class="mdl-menu__item">Yet Another Action</li>
+                                </ul>
                                 <div class="mdl-card__title mdl-card--expand">
-                                    <h4>
-                                        <span class="ename">SomeEvent</span>
-                                        <span class="edate">May 24, 2016</span>
-                                        7-11pm
-                                    </h4>
+                                    <div>
+                                        <b class="ename" style="font-size:130%; word-wrap: normal">SomeEvent</b><br>
+                                        <span class="edate" style='line-height: 2'><i class="material-icons" style="position: relative; top:1vh">access_time</i>
+                                            May 24, 2016</span><br>
+                                        <span class="eplace" style='line-height: 2'><i class="material-icons" style="position: relative; top:1vh">location_on</i>
+                                            NPS Koramangala</span><br>
+                                    </div>
                                 </div>
                                 <div class="mdl-card__actions mdl-card--border">
                                     <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
@@ -195,6 +207,54 @@
                 <span style="color:white;margin:auto;">Coded with &hearts; by <a href="http://www.instagram.com/romir.k">romir.k</a></span>
             </footer>
         </main>
+        <script>
+            var url = "http://localhost:3000/event";
+
+            function createCORSRequest(method, url) {
+                var xhr = new XMLHttpRequest();
+                if ("withCredentials" in xhr) {
+
+                    // Check if the XMLHttpRequest object has a "withCredentials" property.
+                    // "withCredentials" only exists on XMLHTTPRequest2 objects.
+                    xhr.open(method, url, true);
+
+                } else if (typeof XDomainRequest != "undefined") {
+
+                    // Otherwise, check if XDomainRequest.
+                    // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+                    xhr = new XDomainRequest();
+                    xhr.open(method, url);
+
+                } else {
+
+                    // Otherwise, CORS is not supported by the browser.
+                    xhr = null;
+
+                }
+                return xhr;
+            }
+
+            var xhr = createCORSRequest('GET', url);
+            if (!xhr) {
+                throw new Error('CORS not supported');
+            }
+            
+            xhr.onload = function () {
+                var responseText = xhr.responseText;
+                console.log(responseText);
+                // process the response.
+            };
+
+            xhr.onerror = function () {
+                console.log('There was an error!');
+            };
+            
+            xhr.send();
+            function displayEvent(id) {
+
+                document.getElementById('id01').style.display = 'block';
+            }
+        </script>
 </body>
 
 </html>
