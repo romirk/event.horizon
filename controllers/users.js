@@ -4,10 +4,31 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const saltRounds = 16;
+const cors = require('cors');
+
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 const user = require('../models/user');
+
+router.use(function (req, res, next) {
+
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', false);
+
+    // Pass to next layer of middleware
+    next();
+});
 
 router.get('/:un?', (req, res) => {
     let uname = req.params.un;
