@@ -25,12 +25,9 @@
                 <div class="mdl-layout-spacer"></div>
                 <!-- Navigation -->
                 <nav class="mdl-navigation">
-                    <a class="mdl-navigation__link" href="nov5.mp4">Piano</a>
-                    <!--<a class="mdl-navigation__link" href="">Link</a>-->
-                    <!--<a class="mdl-navigation__link" href="">Link</a>-->
-                    <!--<a class="mdl-navigation__link" href="">Link</a>-->
+                    <!-- <a class="mdl-navigation__link" href="nov5.mp4">Piano</a> -->
                     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"
-                        onclick="document.getElementById('id01').style.display='block'">Login</button>
+                        onclick="window.location.assign('login.html')">Login</button>
                 </nav>
             </div>
         </header>
@@ -39,32 +36,34 @@
                 <code style='color:inherit;background-color:inherit;'>event.horizon</code>
             </span>
             <nav class="mdl-navigation">
-                <a class="mdl-navigation__link" href="nov5.mp4">Piano</a>
-                <!--<a class="mdl-navigation__link" href="">Link</a>-->
-                <a class="mdl-navigation__link" onclick="" href='javascript:void(0);'>Login</a>
+                <!-- <a class="mdl-navigation__link" href="nov5.mp4">Piano</a> -->
+                <a class="mdl-navigation__link" href='login.html'>Login</a>
                 <hr>
-                <span style='margin:auto'>
+                <!-- <span style='margin:auto'>
                     Coded with &hearts; by <a href="http://www.instagram.com/romir.k">romir.k</a>
-                </span>
+                </span> -->
             </nav>
 
         </div>
-        <main class="mdl-layout__content" style="height:100%;">
+        <main class="mdl-layout__content" style="height:100%;" ng-controller="events">
             <div class="title" style="padding:5vw 5vh 4vw 8vh;margin:auto;display:block;text-align: center">
-                <div class="mdl-grid" style="color:white;line-height:1;">
-                    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet " style="color:firebrick"><code class="pts">999</code>
+                <div class="mdl-grid" style="line-height:1;" layout="row" layout-sm="column" layout-wrap>
+                    <div flex="{{Math.floor(points.c/points.total)*100}}" flex-xs="80" class="points c">
+                        <code class="pts">{{points.c}}</code>
                         <br> <code class=h>CHALLENGERS</code></div>
-                    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet " style="color:blueviolet"><code class="pts">999</code>
+                    <div flex="{{Math.floor(points.e/points.total)*100}}" flex-xs="80" class="points e">
+                        <code class="pts">{{points.e}}</code>
                         <br> <code class=h>EXPLORERS</code></div>
-                    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet " style="color:orangered"><code class="pts">999</code>
+                    <div flex="{{Math.floor(points.p/points.total)*100}}" flex-xs="80" class="points p">
+                        <code class="pts">{{points.p}}</code>
                         <br><code class=h>PIONEERS</code></div>
-                    <div class="mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet " style="color:cyan"><code class="pts">999</code>
+                    <div flex="{{Math.floor(points.v/points.total)*100}}" flex-xs="80" class="points v">
+                        <code class="pts">{{points.v}}</code>
                         <br><code class=h>VOYAGERS</code></div>
                 </div>
-
             </div>
-            <div class="mdl-layout mdl-js-layout" id='2' name='2' ng-controller="events">
-                
+            <div class="mdl-layout mdl-js-layout" id='2' name='2'>
+
                 <div class=cards>
                     <h2><code>events</code></h2>
                     <md-content class="md-padding" layout="row" layout-sm="column" layout-wrap>
@@ -77,7 +76,7 @@
                             </md-card-title>
                             <md-card-content>
                                 <p>
-                                    {{e.details}}
+                                    {{formatDate(e.date)}}
                                 </p>
                             </md-card-content>
                             <md-card-actions layout="row" layout-align="end center">
