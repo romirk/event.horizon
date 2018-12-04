@@ -1,0 +1,89 @@
+body,
+h1 {
+    font-family: "Raleway", sans-serif
+}
+
+body,
+html {
+    height: 100%;
+    line-height: 1;
+}
+main{
+    min-height: 50vh;
+}
+.cards{
+    margin: auto;
+    /*min-height: 100vh;*/
+    overflow: auto;
+    background-color: rgba(250, 250, 250, 1);
+    padding-left: 10vw;
+    padding-right: 10vw;
+    padding-top: 5vw;
+    padding-bottom: 5vw;
+}
+.layout-transparent {
+    background: url('blackhole1.jpg') center / cover;
+    background-attachment: fixed;
+}
+
+.layout-transparent .mdl-layout__header,
+.layout-transparent .mdl-layout__drawer-button {
+    /* This background is dark, so we set text to white. Use 87% black instead if
+your background is light. */
+    color: white;
+}
+
+.title {
+    display: block;
+    padding-top: 160px;
+    padding-left: 5%;
+    min-height: 30vh;
+    height: auto !important;
+    text-align: left;
+    margin: auto;
+    border: 1px;
+    /*right: 15%;*/
+    font-size: x-large;
+}
+
+.demo-card-event.mdl-card {
+    width: 256px;
+    height: 256px;
+    background: #3E4EB8;
+}
+
+.demo-card-event>.mdl-card__actions {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.demo-card-event>.mdl-card__title {
+    align-items: flex-start;
+}
+
+.demo-card-event>.mdl-card__title>h4 {
+    margin-top: 0;
+}
+
+.demo-card-event>.mdl-card__actions {
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.demo-card-event>.mdl-card__actions>.material-icons {
+    padding-right: 10px;
+}
+
+.demo-card-event>.mdl-card__title,
+.demo-card-event>.mdl-card__actions,
+.demo-card-event>.mdl-card__actions>.mdl-button {
+    color: #fff;
+}
+
+.pts {
+    font-size: 170%;
+}
+
+.h {
+    text-align: right;
+}

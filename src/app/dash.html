@@ -8,97 +8,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <script src="/node_modules/angular/angular.js"></script>
-    <script src="/node_modules/angular-aria/angular-aria.js"></script>
-    <script src="/node_modules/angular-animate/angular-animate.js"></script>
-    <script src="/node_modules/angular-messages/angular-messages.js"></script>
-    <script src="/node_modules/angular-material/angular-material.js"></script>
-    <script src='dash.js'></script>
+    <link rel="stylesheet" href="dash.css" />
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
 </head>
 
-<body>
+<body ng-app="event.horizon">
     <!-- Uses a transparent header that draws on top of the layout's background -->
-    <style>
-        body,
-        h1 {
-            font-family: "Raleway", sans-serif
-        }
-
-        body,
-        html {
-            height: 100%;
-            line-height: 1;
-        }
-
-        .layout-transparent {
-            background: url('blackhole1.jpg') center / cover;
-            background-attachment: fixed;
-        }
-
-        .layout-transparent .mdl-layout__header,
-        .layout-transparent .mdl-layout__drawer-button {
-            /* This background is dark, so we set text to white. Use 87% black instead if
-     your background is light. */
-            color: white;
-        }
-
-        .title {
-            display: block;
-            padding-top: 160px;
-            padding-left: 5%;
-            min-height: 50vh;
-            height: auto !important;
-            text-align: left;
-            margin: auto;
-            border: 1px;
-            /*right: 15%;*/
-            font-size: x-large;
-        }
-    </style>
-    <style>
-        .demo-card-event.mdl-card {
-            width: 256px;
-            height: 256px;
-            background: #3E4EB8;
-        }
-
-        .demo-card-event>.mdl-card__actions {
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .demo-card-event>.mdl-card__title {
-            align-items: flex-start;
-        }
-
-        .demo-card-event>.mdl-card__title>h4 {
-            margin-top: 0;
-        }
-
-        .demo-card-event>.mdl-card__actions {
-            display: flex;
-            box-sizing: border-box;
-            align-items: center;
-        }
-
-        .demo-card-event>.mdl-card__actions>.material-icons {
-            padding-right: 10px;
-        }
-
-        .demo-card-event>.mdl-card__title,
-        .demo-card-event>.mdl-card__actions,
-        .demo-card-event>.mdl-card__actions>.mdl-button {
-            color: #fff;
-        }
-
-        .pts {
-            font-size: 170%;
-        }
-
-        .h {
-            text-align: right;
-        }
-    </style>
-
     <div class="layout-transparent mdl-layout mdl-js-layout">
         <header class="mdl-layout__header mdl-layout__header--transparent">
             <div class="mdl-layout__header-row">
@@ -148,50 +63,48 @@
                 </div>
 
             </div>
-
-            <div class="mdl-layout mdl-js-layout" style="background-color:rgb(236, 223, 223); padding-left: 1%" id='2'
-                name='2'>
-                <main class="mdl-layout__content" ng-app="event.horizon" ng-controller="events">
-                    <div class="mdl-grid">
-                        <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-phone" id='event-cards' ng-repeat="e in events">
-                            <div class="demo-card-event mdl-card mdl-shadow--2dp">
-                                <!-- Right aligned menu below button -->
-                                <div style="text-align: right; color:white; position: relative; top:3px; "><button id="demo-menu-lower-right"
-                                        class="mdl-button mdl-js-button mdl-button--icon">
-                                        <i class="material-icons">more_vert</i>
-                                    </button></div>
-
-                                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-right">
-                                    <li class="mdl-menu__item">Go to page</li>
-                                    <li class="mdl-menu__item">Another Action</li>
-                                    <li disabled class="mdl-menu__item">Edit Event</li>
-                                    <li class="mdl-menu__item">Yet Another Action</li>
-                                </ul>
-                                <div class="mdl-card__title mdl-card--expand">
-                                    <div>
-                                        <b class="ename" style="font-size:130%; word-wrap: normal">{{e.name}}</b><br>
-                                        <span class="edate" style='line-height: 2'><i class="material-icons" style="position: relative; top:1vh">access_time</i>
-                                            {{formatDate(e.date)}}</span><br>
-                                        <!-- <span class="eplace" style='line-height: 2'><i class="material-icons" style="position: relative; top:1vh">location_on</i>{{e.venue}}</span><br> -->
-                                    </div>
-                                </div>
-                                <div class="mdl-card__actions mdl-card--border">
-                                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
-                                        ng-click="displayEvent(e._id);">
-                                        Add to Calendar
-                                    </a>
-                                    <div class="mdl-layout-spacer"></div>
-                                    <i class="material-icons">event</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </main>
+            <div class="mdl-layout mdl-js-layout" id='2' name='2' ng-controller="events">
+                
+                <div class=cards>
+                    <h2><code>events</code></h2>
+                    <md-content class="md-padding" layout="row" layout-sm="column" layout-wrap>
+                        <md-card md-theme="dark-blue" ng-repeat="e in events" flex="20" flex-xs="80">
+                            <img ng-src="eventhorizon.jpg" class="md-card-image" alt="Washed Out">
+                            <md-card-title>
+                                <md-card-title-text>
+                                    <span class="md-headline">{{e.name}}</span>
+                                </md-card-title-text>
+                            </md-card-title>
+                            <md-card-content>
+                                <p>
+                                    {{e.details}}
+                                </p>
+                            </md-card-content>
+                            <md-card-actions layout="row" layout-align="end center">
+                                <md-button>Details</md-button>
+                                <md-button class="md-accent md-raised">Register</md-button>
+                            </md-card-actions>
+                        </md-card>
+                    </md-content>
+                </div>
             </div>
-            <footer>
-                <span style="color:white;margin:auto;">Coded with &hearts; by <a href="http://www.instagram.com/romir.k">romir.k</a></span>
-            </footer>
         </main>
+    </div>
+    <footer>
+        <span style="color:white;margin:auto;">Coded with &hearts; by <a href="http://www.instagram.com/romir.k">romir.k</a></span>
+    </footer>
+    </main>
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-messages.min.js"></script>
+
+    <!-- Angular Material Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
+    <script src='dash.js'></script>
+
 </body>
 
 </html>
