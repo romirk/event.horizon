@@ -1,6 +1,4 @@
 const url = "http://lvh.me:3000/event";
-var jsonData, events;
-
 var app = angular.module('event.horizon', ['ngMaterial', 'ngMessages', 'ngCookies']);
 
 app.config(['$mdIconProvider', function ($mdIconProvider) {
@@ -24,10 +22,20 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
         console.log($scope.points);
         $http.get(url).then(
             (res) => {
-                console.log(res);
-                $scope.data = res.data;
-                events = $scope.data.events;
-                $scope.events = events;
+                if (res.data.success) {
+                    console.log(res);
+                    $scope.data = res.data;
+                    $scope.events = res.data.events;
+                    setTimeout(() => {
+                        $scope.countUp('c', 0, $scope.points.c, 500);
+                        $scope.countUp('e', 0, $scope.points.e, 500);
+                        $scope.countUp('p', 0, $scope.points.p, 500);
+                        $scope.countUp('v', 0, $scope.points.v, 500);
+                    }, 1000)
+                } else {
+                    console.log(res.data.message);
+                }
+
             },
             (err) => {
                 console.log(err);
@@ -35,50 +43,57 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
             }
         )
 
-        function displayEvent(id) {
-            console.log(id);
-            document.getElementById('id01').style.display = 'block';
-        }
-
         $scope.init = () => {
             console.log(localStorage.getItem('jwt'));
-            if (localStorage.getItem('jwt')/*$cookies.get('jwt')*/)
+            if (localStorage.getItem('jwt') /*$cookies.get('jwt')*/ )
                 $http.post("http://lvh.me:3000/auth/verify", {
                     token: localStorage.getItem('jwt')
                 }).then((res) => {
                     if (!res.data.success) {
                         localStorage.removeItem('jwt');
                         window.location.replace("login.html");
-                    }
-                    else {
+                    } else {
                         $scope.payload = res.data.payload;
                     }
                 }, () => {
                     window.location.replace("login.html");
                 });
-            else{
+            else {
                 window.location.replace("login.html");
             }
-                
         }
+
+        $scope.countUp = (id, start, end, duration) => {
+            // assumes integer values for start and end
+            var obj = document.getElementById(id);
+            var range = end - start;
+            // no timer shorter than 50ms (not really visible any way)
+            var minTimer = 50;
+            // calc step time to show all interediate values
+            var stepTime = Math.abs(Math.floor(duration / range));
+            // never go below minTimer
+            stepTime = Math.max(stepTime, minTimer);
+            // get current time and calculate desired end time
+            var startTime = new Date().getTime();
+            var endTime = startTime + duration;
+            var timer;
+
+            function run() {
+                var now = new Date().getTime();
+                var remaining = Math.max((endTime - now) / duration, 0);
+                var value = Math.round(end - (remaining * range));
+                obj.innerHTML = value;
+                if (value == end) {
+                    clearInterval(timer);
+                }
+            }
+
+            timer = setInterval(run, stepTime);
+            run();
+        }
+
         $scope.logOut = () => {
             localStorage.removeItem('jwt');
             window.location.replace("login.html");
         }
     });
-
-function formatDate(date) {
-    date = new Date(date);
-    var monthNames = [
-        "January", "February", "March",
-        "April", "May", "June", "July",
-        "August", "September", "October",
-        "November", "December"
-    ];
-
-    var day = date.getDate();
-    var monthIndex = date.getMonth();
-    var year = date.getFullYear();
-
-    return monthNames[monthIndex] + ' ' + day + ', ' + year;
-}

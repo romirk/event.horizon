@@ -77,6 +77,23 @@ router.post('/', (req, res, next) => {
             res.status(200).json({ success: true, message: "Added successfully." });
     });
 });
+router.post('/edit/:id', (req, res) => {
+    let id = req.params.id;
+    let update = req.body.update;
+    event.edit({ _id: id }, update, (err, updatedUser) => {
+            if (err) {
+                res.json({ success: false, message: `Failed to update event. Error: ${err}\n ${update}` });
+            }
+            else if (!updatedUser) {
+                res.json({ success: false, message: `Failed to update user. Error: No user with id ${id}` });
+            }
+            else {
+                res.json({ success: true, user: updatedUser });
+                res.end();
+            }
+        })
+    })().catch(err => { throw err; });
+})
 router.delete('/:id', (req, res, next) => {
     //access the parameter which is the id of the item to be deleted
     let id = req.params.id;
