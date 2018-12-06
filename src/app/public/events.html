@@ -47,13 +47,13 @@
     </div>
     <main class="mdl-layout__content" style="height:100%;">
       <div class="title">
-        <h1 class="md-display-4"><code id='name' style="word-wrap:break-word;" contenteditable="false" ng-model='name'>event.name</code></h1>
-        <h4 class="md-headline" style="padding-left: 0.77vw"><code id='type' contenteditable="false">event.type</code></h4>
+        <h1 class="md-display-4"><code id='name' style="word-wrap:break-word;" contenteditable="false" ng-model='name'>{{event.name}}</code></h1>
+        <h4 class="md-headline" style="padding-left: 0.77vw"><code id='type' contenteditable="false">{{event.type}}</code></h4>
       </div>
       <div class="mdl-layout mdl-js-layout main">
-        <b class="md-title">Date:&nbsp;&nbsp;<span class="" id="date" contenteditable="false">event.date</span></b>
+        <b class="md-title">Date:&nbsp;&nbsp;<span class="" id="date" contenteditable="false">{{event.date | date}}</span></b>
         <br /><br />
-        <b class="md-title">Details<br><br></b><span class="" id="details" contenteditable="false">event.details</span>
+        <b class="md-title">Details<br><br></b><span class="" id="details" contenteditable="false">{{event.details}}</span>
 
       </div>
       <md-button class="md-primary md-fab md-fab-bottom-right" ng-click="edit()">
@@ -74,7 +74,7 @@
   <!-- Angular Material Library -->
   <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
 
-  <script src='dash.js'></script>
+  <script src='app.js'></script>
 
 </body>
 

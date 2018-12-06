@@ -1,5 +1,5 @@
-const url = "http://lvh.me:3000/event";
-var app = angular.module('event.horizon', ['ngMaterial', 'ngMessages','ngResource']);
+const url = "http://lvh.me:3000/event/";
+var app = angular.module('event.horizon', ['ngMaterial', 'ngMessages', 'ngResource']);
 
 app.config(['$mdIconProvider', function ($mdIconProvider) {
     $mdIconProvider.icon('md-toggle-arrow', 'img/icons/toggle-arrow.svg', 48);
@@ -10,9 +10,9 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
             .accentPalette('pink');
         $mdThemingProvider.theme('dark-blue').backgroundPalette('blue').dark();
     })
-      /**
-       * controller for dashboard
-       */
+    /**
+     * controller for dashboard
+     */
     .controller('dash', function ($scope, $http) {
         $scope.points = {
             c: 187,
@@ -68,7 +68,9 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
                 window.location.replace("login.html");
             }
         }
-
+        $scope.goEvent = (id) =>  {
+            window.location.assign("events.html?e=" + String(id));
+        }
         $scope.countUp = (id, start, end, duration) => {
             // assumes integer values for start and end
             var obj = document.getElementById(id);
@@ -108,8 +110,26 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
      */
     .controller('events', ($scope, $http) => {
         var eventURL = new URL(window.location);
-        var c = url.searchParams.get("c");
-        console.log(c);
+        var id = encodeURI(eventURL.searchParams.get("e"));
+
+        $http.get(url + id).then(
+            (res) => {
+                if (res.data.success) {
+                    if (res.data.events.length == 0) document.getElementById('cardwrap').innerHTML = "<h2 style='margin:auto; text-align:center'><code style='color: #444'>no events</code></h2>";
+                    console.log(res);
+                    $scope.data = res.data;
+                    $scope.event = res.data.events;
+                } else {
+                    console.log(res.data.message);
+                    document.getElementById('cardwrap').innerHTML = "<h2 style='margin:auto; text-align:center'><code style='color: #444'>no events</code></h2>";
+
+                }
+
+            },
+            (err) => {
+                console.log(err);
+                document.getElementById('cardwrap').innerHTML = "<h2 style='margin:auto; text-align:center'><code style='color: #444'>no events</code></h2>";
+            });
 
         $scope.init = () => {
             console.log(localStorage.getItem('jwt'));
