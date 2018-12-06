@@ -1,6 +1,15 @@
 const url = "http://lvh.me:3000/event/";
 var app = angular.module('event.horizon', ['ngMaterial', 'ngMessages', 'ngResource']);
 
+function showSnack(msg) {
+    var snackbarContainer = document.querySelector('#snackbar');
+    var data = {
+        message: msg,
+        timeout: 2000
+    };
+    snackbarContainer.MaterialSnackbar.showSnackbar(data);
+}
+
 app.config(['$mdIconProvider', function ($mdIconProvider) {
     $mdIconProvider.icon('md-toggle-arrow', 'img/icons/toggle-arrow.svg', 48);
 }])
@@ -132,30 +141,8 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
                 document.getElementById('cardwrap').innerHTML = "<h2 style='margin:auto; text-align:center'><code style='color: #444'>no events</code></h2>";
             });
 
-        $scope.edit = () => {
-            console.log(document.getElementById('e').value)
-            if (document.getElementById('e').value == 'true') {
-                document.getElementById('name').setAttribute('contenteditable', true);
-                document.getElementById('details').setAttribute('contenteditable', true);
-                document.getElementById('date').setAttribute('contenteditable', true);
-                document.getElementById('edit').innerHTML = 'save';
-                document.getElementById('e').value = false;
-                console.log(document.getElementById('e').value)
-            } else {
-                var data = {
-                    id: $scope.event._id,
-                    update: {
-                        name: document.getElementById('name').innerHTML,
-                        date: document.getElementById('date').innerHTML,
-                        details: document.getElementById('details').innerHTML
-                    }
-                }
-                $http.post('http://localhost:3000/event/edit/' + String($scope.event._id), data).then(() => {
+        
 
-                })
-                window.location.reload();
-            }
-        }
         $scope.init = () => {
             console.log(localStorage.getItem('jwt'));
             if (localStorage.getItem('jwt') /*$cookies.get('jwt')*/)
@@ -167,6 +154,33 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
                         window.location.replace("login.html");
                     } else {
                         $scope.payload = res.data.payload;
+                        
+                        if($scope.payload.status === '0'){
+                            $scope.edit = () => {
+                                console.log(document.getElementById('e').value)
+                                if (document.getElementById('e').value == 'true') {
+                                    document.getElementById('name').setAttribute('contenteditable', true);
+                                    document.getElementById('details').setAttribute('contenteditable', true);
+                                    document.getElementById('date').setAttribute('contenteditable', true);
+                                    document.getElementById('edit').innerHTML = 'save';
+                                    document.getElementById('e').value = false;
+                                    console.log(document.getElementById('e').value)
+                                } else {
+                                    var data = {
+                                        id: $scope.event._id,
+                                        update: {
+                                            name: document.getElementById('name').innerHTML,
+                                            date: document.getElementById('date').innerHTML,
+                                            details: document.getElementById('details').innerHTML
+                                        }
+                                    }
+                                    $http.post('http://localhost:3000/event/edit/' + String($scope.event._id), data).then(() => {
+                                        if(res.data.success) window.location.reload();
+                                        else showSnack(res.data.message);
+                                    });                    
+                                }
+                            }
+                        } else document.getElementById('edit').setAttribute('style', 'display: none');
                     }
                 }, () => {
                     window.location.replace("login.html");

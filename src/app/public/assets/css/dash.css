@@ -92,8 +92,7 @@ html {
 }
 
 .layout-transparent {
-    background: rgba(255, 255, 255, 0);
-    /*url('blackhole1.jpg') center / cover;*/
+    background: url('assets/imgs/transparent.jpg') center / cover;/*rgba(255, 255, 255, 0);*/
     background-attachment: fixed;
 }
 

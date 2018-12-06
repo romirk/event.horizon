@@ -108,18 +108,6 @@
                 $mdThemingProvider.theme('dark-blue').backgroundPalette('blue').dark();
             })
             .controller('login', function ($scope, $http, $cookies, $mdToast) {
-                // $scope.showSimpleToast = function (msg) {
-                //     var pinTo = angular.extend({}, {
-                //         bottom: true
-                //     });
-
-                //     $mdToast.show(
-                //         $mdToast.simple()
-                //         .textContent(msg)
-                //         .position(pinTo)
-                //         .hideDelay(3000)
-                //     );
-                // };
                 $scope.auth = () => {
                     var data = {
                         username: $scope.username,
