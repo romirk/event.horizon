@@ -16,7 +16,7 @@
 
         .container {
             min-height: 100vh;
-            background-image: linear-gradient(to top right,#ffffd8  ,#ffc890);;
+            background-image: linear-gradient(to bottom right, #00d9ff ,#320eff);/*top right,#ffffd8  ,#ffc890*/
         }
 
         /*.demo-card-square.mdl-card {
@@ -50,12 +50,12 @@
                             <p style="color: rgba(53, 23, 23, 0.87); font-size: 160%">Login</p>
 
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" id="sample3" ng-model="username">
+                                <input class="mdl-textfield__input" type="text" ng-model="username">
                                 <label class="mdl-textfield__label" for="sample3"><b>Username</b>:</label>
                             </div>
 
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="password" id="sample3" ng-model="password">
+                                <input class="mdl-textfield__input" type="password" ng-model="password">
                                 <label class="mdl-textfield__label" for="sample3"><b>Password:</b></label>
                             </div>
 
@@ -128,7 +128,7 @@
                                 setTimeout(() => {window.location.reload()}, 2500);
                             }
                         }, (err) => {
-                            console.log("failed:", err);
+                            showSnack("Server unavailable.")
                         });
                 }
 
