@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <!-- Angular Material style sheet -->
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
+  <link rel="stylesheet" href="events.css">
+  <script>
+    document.write('<base href="' + document.location + '" />');
+  </script>
+</head>
+
+<body ng-app="event.horizon" ng-controller="events" ng-init="init()">
+
+  <!-- Uses a transparent header that draws on top of the layout's background -->
+  <div class="layout-transparent mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header mdl-layout__header--transparent">
+      <div class="mdl-layout__header-row">
+        <!-- Title -->
+        <span class="mdl-layout-title">
+          <code style='color:inherit;background-color:inherit;font-size: 110%;'>event.horizon</code>
+        </span>
+        <!-- Add spacer, to align navigation to the right -->
+        <div class="mdl-layout-spacer"></div>
+        <!-- Navigation -->
+        <nav class="mdl-navigation">
+          <!-- <a class="mdl-navigation__link" href="nov5.mp4">Piano</a> -->
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" ng-click="logOut()">Log
+            out</button>
+        </nav>
+      </div>
+    </header>
+    <div class="mdl-layout__drawer">
+      <span class="mdl-layout-title">
+        <code style='color:inherit;background-color:inherit;'>event.horizon</code>
+      </span>
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href='login.html' ng-click="logOut()">Log out</a>
+        <hr>
+      </nav>
+
+    </div>
+    <main class="mdl-layout__content" style="height:100%;">
+      <div class="title">
+        <h1 class="md-display-4"><code id='name' style="word-wrap:break-word;" contenteditable="false" ng-model='name'>event.name</code></h1>
+        <h4 class="md-headline" style="padding-left: 0.77vw"><code id='type' contenteditable="false">event.type</code></h4>
+      </div>
+      <div class="mdl-layout mdl-js-layout main">
+        <b class="md-title">Date:&nbsp;&nbsp;<span class="" id="date" contenteditable="false">event.date</span></b>
+        <br /><br />
+        <b class="md-title">Details<br><br></b><span class="" id="details" contenteditable="false">event.details</span>
+
+      </div>
+      <md-button class="md-primary md-fab md-fab-bottom-right" ng-click="edit()">
+        <i style="position: relative; top: 1vh;" class="material-icons">edit</i>
+      </md-button>
+    </main>
+
+  </div>
+
+
+  <!-- Angular Material requires Angular.js Libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-aria.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-messages.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-resource.js"></script>
+
+  <!-- Angular Material Library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
+
+  <script src='dash.js'></script>
+
+</body>
+
+</html>

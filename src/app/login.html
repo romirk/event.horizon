@@ -19,14 +19,14 @@
             background-image: linear-gradient(to top right,#ffffd8  ,#ffc890);;
         }
 
-        .demo-card-square.mdl-card {
+        /*.demo-card-square.mdl-card {
             width: 420px;
             height: 280px;
         }
 
         .demo-card-square > .mdl-card__title {
             background:;
-        }
+        }*/
     </style>
 </head>
 
@@ -37,13 +37,13 @@
         <!--To create space above card-->
         <div class='spacer'></div>
 
-        <div class="mdl-grid">
+        <div class="md-padding" layout="row">
 
-            <div class="mdl-cell mdl-cell--4-col"></div>
-            <div class="mdl-cell mdl-cell--4-col">
+            
+            <div flex="45">
 
                 <!--card containing username and password-->
-                <div class="demo-card-square mdl-card mdl-shadow--2dp">
+                <div class="demo-card-square mdl-card mdl-shadow--2dp" style="margin:auto;">
                     <div class="mdl-card__title mdl-card--expand">
 
                         <form style="text-align: center;" ng-controller="login" id='f'>
@@ -72,7 +72,7 @@
                     </div>
                 </div>
 
-                <div class="mdl-cell mdl-cell--4-col"></div>
+                <div class="mdl-cell mdl-cell--4-col" flex></div>
 
             </div>
         </div>

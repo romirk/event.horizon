@@ -1,0 +1,41 @@
+body,
+h1 {
+    font-family: "Raleway", sans-serif
+}
+
+body,
+html{
+    height: 100%;
+    line-height: 1;
+}
+
+.layout-transparent {
+    background: rgba(255, 255, 255, 0);
+    /*url('blackhole1.jpg') center / cover;*/
+    background-attachment: fixed;
+}
+
+.layout-transparent .mdl-layout__header,
+.layout-transparent .mdl-layout__drawer-button {
+    /* This background is dark, so we set text to white. Use 87% black instead if
+your background is light. */
+    color: rgba(0, 0, 0, 0.87);
+}
+.main{
+    padding: 5%;
+}
+.title {
+    display: block;
+    /*padding-top: 160px;*/
+    padding-left: 4.2%;
+    padding-top: 2%;
+    padding-bottom: 1.2%;
+    /*min-height: 30vh;*/
+    height: auto !important;
+    text-align: left;
+    margin: auto;
+    border: 1px;
+    /*right: 15%;*/
+    font-size: x-large;
+}
+

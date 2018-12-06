@@ -1,16 +1,19 @@
 const url = "http://lvh.me:3000/event";
-var app = angular.module('event.horizon', ['ngMaterial', 'ngMessages', 'ngCookies']);
+var app = angular.module('event.horizon', ['ngMaterial', 'ngMessages','ngResource']);
 
 app.config(['$mdIconProvider', function ($mdIconProvider) {
-        $mdIconProvider.icon('md-toggle-arrow', 'img/icons/toggle-arrow.svg', 48);
-    }])
+    $mdIconProvider.icon('md-toggle-arrow', 'img/icons/toggle-arrow.svg', 48);
+}])
     .config(function ($mdThemingProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette('blue')
             .accentPalette('pink');
         $mdThemingProvider.theme('dark-blue').backgroundPalette('blue').dark();
     })
-    .controller('events', function ($scope, $http, $cookies) {
+      /**
+       * controller for dashboard
+       */
+    .controller('dash', function ($scope, $http) {
         $scope.points = {
             c: 187,
             e: 190,
@@ -23,6 +26,7 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
         $http.get(url).then(
             (res) => {
                 if (res.data.success) {
+                    if (res.data.events.length == 0) document.getElementById('cardwrap').innerHTML = "<h2 style='margin:auto; text-align:center'><code style='color: #444'>no events</code></h2>";
                     console.log(res);
                     $scope.data = res.data;
                     $scope.events = res.data.events;
@@ -34,6 +38,8 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
                     }, 1000)
                 } else {
                     console.log(res.data.message);
+                    document.getElementById('cardwrap').innerHTML = "<h2 style='margin:auto; text-align:center'><code style='color: #444'>no events</code></h2>";
+
                 }
 
             },
@@ -45,7 +51,7 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
 
         $scope.init = () => {
             console.log(localStorage.getItem('jwt'));
-            if (localStorage.getItem('jwt') /*$cookies.get('jwt')*/ )
+            if (localStorage.getItem('jwt') /*$cookies.get('jwt')*/)
                 $http.post("http://lvh.me:3000/auth/verify", {
                     token: localStorage.getItem('jwt')
                 }).then((res) => {
@@ -90,6 +96,39 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
 
             timer = setInterval(run, stepTime);
             run();
+        }
+
+        $scope.logOut = () => {
+            localStorage.removeItem('jwt');
+            window.location.replace("login.html");
+        }
+    })
+    /**
+     * controller for events page
+     */
+    .controller('events', ($scope, $http) => {
+        var eventURL = new URL(window.location);
+        var c = url.searchParams.get("c");
+        console.log(c);
+
+        $scope.init = () => {
+            console.log(localStorage.getItem('jwt'));
+            if (localStorage.getItem('jwt') /*$cookies.get('jwt')*/)
+                $http.post("http://lvh.me:3000/auth/verify", {
+                    token: localStorage.getItem('jwt')
+                }).then((res) => {
+                    if (!res.data.success) {
+                        localStorage.removeItem('jwt');
+                        window.location.replace("login.html");
+                    } else {
+                        $scope.payload = res.data.payload;
+                    }
+                }, () => {
+                    window.location.replace("login.html");
+                });
+            else {
+                window.location.replace("login.html");
+            }
         }
 
         $scope.logOut = () => {

@@ -12,25 +12,24 @@ const user = require('../models/user');
 
 router.use(function (req, res, next) {
 
-   // Website you wish to allow to connect
-   res.setHeader('Access-Control-Allow-Origin', '*');
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', '*');
 
-   // Request methods you wish to allow
-   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
-   // Request headers you wish to allow
-   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
 
-   // Set to true if you need the website to include cookies in the requests sent
-   // to the API (e.g. in case you use sessions)
-   res.setHeader('Access-Control-Allow-Credentials', false);
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', false);
 
-   // Pass to next layer of middleware
-   next();
+    // Pass to next layer of middleware
+    next();
 });
 
-router.use(cors({origin:'*'}));
-router.all('*', cors());
+router.use(cors({ origin: '*' }));
 
 router.get('/:un?', (req, res) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -74,36 +73,41 @@ router.post('/auth', (req, res) => {
     });
 });
 router.post('/new', (req, res) => {
-    bcrypt.hash(req.body.pass, 16, function (err, hash) {
-        console.log(req.body.email);
-        if (err) { throw (err); }
-        if (/\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/.test(req.body.email)) {
-            bcrypt.compare(req.body.pass, hash, function (err, result) {
-                if (err) { throw (err); }
-                let newUser = new user({
-                    name: req.body.name,
-                    email: req.body.email,
-                    pass: hash,
-                    grade: req.body.grade,
-                    sec: req.body.sec,
-                    status: req.body.status,
-                    username: req.body.username
-                });
-                console.log(`REG\t${newUser}`);
-                user.register(newUser, (err, u) => {
-                    if (err) {
-                        res.json({ success: false, message: `Failed to create a new user. Error: ${err}\n ${newUser}` });
-                    }
-                    else
-                        res.json({ success: true, message: "Added successfully." });
+    console.log(req.body.pass);
+    if (req.body.pass) {
+        bcrypt.hash(req.body.pass, 16, function (err, hash) {
+            console.log(req.body.email);
+            if (err) { throw (err); }
+            if (/\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/.test(req.body.email)) {
+                bcrypt.compare(req.body.pass, hash, function (err, result) {
+                    if (err) { throw (err); }
+                    let newUser = new user({
+                        name: req.body.name,
+                        email: req.body.email,
+                        pass: hash,
+                        grade: req.body.grade,
+                        sec: req.body.sec,
+                        status: req.body.status,
+                        username: req.body.username
+                    });
+                    console.log(`REG\t${newUser}`);
+                    user.register(newUser, (err, u) => {
+                        if (err) {
+                            res.json({ success: false, message: `Failed to create a new user. Error: ${err}\n ${newUser}` });
+                        }
+                        else
+                            res.json({ success: true, message: "Added successfully." });
 
+                    });
                 });
-            });
-        }
-        else {
-            res.json({ success: false, message: `Invalid email address.` });
-        }
-    });
+            }
+            else {
+                res.json({ success: false, message: `Invalid email address.` });
+            }
+        })
+    } else {
+        res.json({ success: false, message: `No password!` });
+    };
 });
 router.post('/edit/:id', (req, res) => {
     let id = req.params.id;

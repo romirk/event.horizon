@@ -12,22 +12,22 @@ router.use(function (req, res, next) {
 
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', '*');
- 
+
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
- 
+
     // Request headers you wish to allow
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
- 
+
     // Set to true if you need the website to include cookies in the requests sent
     // to the API (e.g. in case you use sessions)
     res.setHeader('Access-Control-Allow-Credentials', false);
- 
+
     // Pass to next layer of middleware
     next();
- });
- 
- router.use(cors({origin:'*'}));
+});
+
+router.use(cors({ origin: '*' }));
 
 router.get('/:id?', (req, res) => {
     let id = req.params.id;
@@ -81,19 +81,19 @@ router.post('/edit/:id', (req, res) => {
     let id = req.params.id;
     let update = req.body.update;
     event.edit({ _id: id }, update, (err, updatedUser) => {
-            if (err) {
-                res.json({ success: false, message: `Failed to update event. Error: ${err}\n ${update}` });
-            }
-            else if (!updatedUser) {
-                res.json({ success: false, message: `Failed to update user. Error: No user with id ${id}` });
-            }
-            else {
-                res.json({ success: true, user: updatedUser });
-                res.end();
-            }
-        })
-    })().catch(err => { throw err; });
-})
+        if (err) {
+            res.json({ success: false, message: `Failed to update event. Error: ${err}\n ${update}` });
+        }
+        else if (!updatedUser) {
+            res.json({ success: false, message: `Failed to update user. Error: No user with id ${id}` });
+        }
+        else {
+            res.json({ success: true, user: updatedUser });
+            res.end();
+        }
+    })
+});
+
 router.delete('/:id', (req, res, next) => {
     //access the parameter which is the id of the item to be deleted
     let id = req.params.id;
