@@ -38,3 +38,6 @@ module.exports.delete = (id, callback) => {
     let query = { _id: id };
     Event.deleteOne(query, callback);
 }
+module.exports.edit = (conditions, update, callback) => {
+    Event.findOneAndUpdate(conditions, update, { new: true }, callback);
+}

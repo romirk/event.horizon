@@ -68,7 +68,7 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
                 window.location.replace("login.html");
             }
         }
-        $scope.goEvent = (id) =>  {
+        $scope.goEvent = (id) => {
             window.location.assign("events.html?e=" + String(id));
         }
         $scope.countUp = (id, start, end, duration) => {
@@ -119,6 +119,7 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
                     console.log(res);
                     $scope.data = res.data;
                     $scope.event = res.data.events;
+                    $scope.event.type = "holiday";
                 } else {
                     console.log(res.data.message);
                     document.getElementById('cardwrap').innerHTML = "<h2 style='margin:auto; text-align:center'><code style='color: #444'>no events</code></h2>";
@@ -131,6 +132,30 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
                 document.getElementById('cardwrap').innerHTML = "<h2 style='margin:auto; text-align:center'><code style='color: #444'>no events</code></h2>";
             });
 
+        $scope.edit = () => {
+            console.log(document.getElementById('e').value)
+            if (document.getElementById('e').value == 'true') {
+                document.getElementById('name').setAttribute('contenteditable', true);
+                document.getElementById('details').setAttribute('contenteditable', true);
+                document.getElementById('date').setAttribute('contenteditable', true);
+                document.getElementById('edit').innerHTML = 'save';
+                document.getElementById('e').value = false;
+                console.log(document.getElementById('e').value)
+            } else {
+                var data = {
+                    id: $scope.event._id,
+                    update: {
+                        name: document.getElementById('name').innerHTML,
+                        date: document.getElementById('date').innerHTML,
+                        details: document.getElementById('details').innerHTML
+                    }
+                }
+                $http.post('http://localhost:3000/event/edit/' + String($scope.event._id), data).then(() => {
+
+                })
+                window.location.reload();
+            }
+        }
         $scope.init = () => {
             console.log(localStorage.getItem('jwt'));
             if (localStorage.getItem('jwt') /*$cookies.get('jwt')*/)
