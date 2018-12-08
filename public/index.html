@@ -27,9 +27,9 @@
                 <div class="mdl-layout-spacer"></div>
                 <!-- Navigation -->
                 <nav class="mdl-navigation">
-                    <!-- <a class="mdl-navigation__link" href="nov5.mp4">Piano</a> -->
+                    <a class="mdl-navigation__link" href="#" ng-click='logOut()' style='color: rgba(0, 0, 0, 0.87)'>Log out</a>
                     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"
-                        ng-click="logOut()">Log out</button>
+                        ng-click="newEvent()">Create Event</button>
                 </nav>
             </div>
         </header>
@@ -69,7 +69,7 @@
                 <div class=cards>
                     <h2 class="md-display-2"><code>events</code></h2>
                     <md-content class="md-padding" layout="row" layout-sm="column" layout-wrap id="cardwrap">
-                        <md-card md-theme="dark-blue" ng-repeat="e in events" flex="20" flex-xs="80" flex-sm="80">
+                        <md-card md-theme="dark-blue" ng-repeat="e in events" flex="30" flex-xs="80" flex-sm="80" id="{{e.name}}">
                             <img ng-src="assets/imgs/eventhorizon.jpg" class="md-card-image" alt="Washed Out">
                             <md-card-title>
                                 <md-card-title-text>
@@ -91,9 +91,9 @@
             </div>
         </main>
     </div>
-    <footer>
+    <!-- <footer>
         <span style="margin:auto;">Coded with &hearts; by <a href="http://www.instagram.com/romir.k">romir.k</a></span>
-    </footer>
+    </footer> -->
     </main>
 
     </div>

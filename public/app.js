@@ -11,8 +11,8 @@ function showSnack(msg) {
 }
 
 app.config(['$mdIconProvider', function ($mdIconProvider) {
-    $mdIconProvider.icon('md-toggle-arrow', 'img/icons/toggle-arrow.svg', 48);
-}])
+        $mdIconProvider.icon('md-toggle-arrow', 'img/icons/toggle-arrow.svg', 48);
+    }])
     .config(function ($mdThemingProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette('blue')
@@ -60,21 +60,21 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
 
         $scope.init = () => {
             console.log(localStorage.getItem('jwt'));
-            if (localStorage.getItem('jwt') /*$cookies.get('jwt')*/)
+            if (localStorage.getItem('jwt') /*$cookies.get('jwt')*/ )
                 $http.post("http://lvh.me:3000/auth/verify", {
                     token: localStorage.getItem('jwt')
                 }).then((res) => {
                     if (!res.data.success) {
                         localStorage.removeItem('jwt');
-                        window.location.replace("login.html");
+                        window.location.replace("login");
                     } else {
                         $scope.payload = res.data.payload;
                     }
                 }, () => {
-                    window.location.replace("login.html");
+                    window.location.replace("login");
                 });
             else {
-                window.location.replace("login.html");
+                window.location.replace("login");
             }
         }
         $scope.goEvent = (id) => {
@@ -111,8 +111,9 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
 
         $scope.logOut = () => {
             localStorage.removeItem('jwt');
-            window.location.replace("login.html");
+            window.location.replace("login");
         }
+        $scope.newEvent = () => window.location.replace("events.html?e=new");
     })
     /**
      * controller for events page
@@ -121,77 +122,105 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
         var eventURL = new URL(window.location);
         var id = encodeURI(eventURL.searchParams.get("e"));
 
-        $http.get(url + id).then(
-            (res) => {
-                if (res.data.success) {
-                    if (res.data.events.length == 0) document.getElementById('cardwrap').innerHTML = "<h2 style='margin:auto; text-align:center'><code style='color: #444'>no events</code></h2>";
-                    console.log(res);
-                    $scope.data = res.data;
-                    $scope.event = res.data.events;
-                    $scope.event.type = "holiday";
-                } else {
-                    console.log(res.data.message);
-                    document.getElementById('cardwrap').innerHTML = "<h2 style='margin:auto; text-align:center'><code style='color: #444'>no events</code></h2>";
-
-                }
-
-            },
-            (err) => {
-                console.log(err);
-                document.getElementById('cardwrap').innerHTML = "<h2 style='margin:auto; text-align:center'><code style='color: #444'>no events</code></h2>";
-            });
-
-        
-
         $scope.init = () => {
             console.log(localStorage.getItem('jwt'));
-            if (localStorage.getItem('jwt') /*$cookies.get('jwt')*/)
+            if (localStorage.getItem('jwt') /*$cookies.get('jwt')*/ )
                 $http.post("http://lvh.me:3000/auth/verify", {
                     token: localStorage.getItem('jwt')
                 }).then((res) => {
+
                     if (!res.data.success) {
                         localStorage.removeItem('jwt');
-                        window.location.replace("login.html");
+                        window.location.replace("login");
                     } else {
+
                         $scope.payload = res.data.payload;
-                        
-                        if($scope.payload.status === '0'){
-                            $scope.edit = () => {
-                                console.log(document.getElementById('e').value)
-                                if (document.getElementById('e').value == 'true') {
-                                    document.getElementById('name').setAttribute('contenteditable', true);
-                                    document.getElementById('details').setAttribute('contenteditable', true);
-                                    document.getElementById('date').setAttribute('contenteditable', true);
-                                    document.getElementById('edit').innerHTML = 'save';
-                                    document.getElementById('e').value = false;
-                                    console.log(document.getElementById('e').value)
-                                } else {
+
+                        if ($scope.payload.status === 'admin') {
+                            if (id == 'new') {
+                                $scope.event = {
+                                    name: 'event.name',
+                                    date: 'event.date',
+                                    details: 'event.details',
+                                    organizers: []
+                                }
+                                document.getElementById('name').setAttribute('contenteditable', true);
+                                document.getElementById('details').setAttribute('contenteditable', true);
+                                document.getElementById('date').setAttribute('contenteditable', true);
+                                document.getElementById('edit').innerHTML = 'save';
+                                document.getElementById('e').value = false;
+
+                                $scope.edit = () => {
                                     var data = {
-                                        id: $scope.event._id,
-                                        update: {
-                                            name: document.getElementById('name').innerHTML,
-                                            date: document.getElementById('date').innerHTML,
-                                            details: document.getElementById('details').innerHTML
-                                        }
+                                        name: document.getElementById('name').innerHTML,
+                                        date: document.getElementById('date').innerHTML,
+                                        details: document.getElementById('details').innerHTML,
+                                        organizers: [$scope.payload.username]
                                     }
-                                    $http.post('http://localhost:3000/event/edit/' + String($scope.event._id), data).then(() => {
-                                        if(res.data.success) window.location.reload();
+                                    console.log('edited', data)
+                                    $http.post('http://localhost:3000/event/', data).then(() => {
+                                        if (res.data.success) window.location.replace('/#' + data.name);
                                         else showSnack(res.data.message);
-                                    });                    
+                                    });
+                                }
+                                console.log($scope.event);
+                            } else {
+                                $scope.edit = () => {
+                                    if (document.getElementById('e').value == 'true') {
+                                        document.getElementById('name').setAttribute('contenteditable', true);
+                                        document.getElementById('details').setAttribute('contenteditable', true);
+                                        document.getElementById('date').setAttribute('contenteditable', true);
+                                        document.getElementById('edit').innerHTML = 'save';
+                                        document.getElementById('e').value = false;
+                                        console.log(document.getElementById('e').value)
+                                    } else {
+                                        var data = {
+                                            id: $scope.event._id,
+                                            update: {
+                                                name: document.getElementById('name').innerHTML,
+                                                date: document.getElementById('date').innerHTML,
+                                                details: document.getElementById('details').innerHTML
+                                            }
+                                        }
+                                        $http.post('http://localhost:3000/event/edit/' + String($scope.event._id), data).then(() => {
+                                            if (res.data.success) window.location.reload();
+                                            else showSnack(res.data.message);
+                                        });
+                                    }
                                 }
                             }
-                        } else document.getElementById('edit').setAttribute('style', 'display: none');
+                        } else document.getElementById('edit-btn').setAttribute('style', 'display: none');
                     }
                 }, () => {
-                    window.location.replace("login.html");
+                    window.location.replace("login");
                 });
             else {
-                window.location.replace("login.html");
+                window.location.replace("login");
+            }
+
+            if (id != 'new') {
+                $http.get(url + id).then(
+                    (res) => {
+                        if (res.data.success) {
+                            if (res.data.events.length == 0) document.getElementById('cardwrap').innerHTML = "<h2 style='margin:auto; text-align:center'><code style='color: #444'>no events</code></h2>";
+                            console.log(res);
+                            $scope.data = res.data;
+                            $scope.event = res.data.events;
+                            $scope.event.type = "holiday";
+                        } else {
+                            console.log(res.data.message);
+                            window.location.replace('/')
+                        }
+
+                    },
+                    (err) => {
+                        window.location.replace('/');
+                    });
             }
         }
 
         $scope.logOut = () => {
             localStorage.removeItem('jwt');
-            window.location.replace("login.html");
+            window.location.replace("login");
         }
     });

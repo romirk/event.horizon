@@ -6,7 +6,7 @@ const EventSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    date:{
+    date: {
         type: Date,
         default: new Date(),
         required: true
@@ -32,12 +32,16 @@ module.exports.get = (q, callback) => {
     Event.findOne(q, callback);
 }
 module.exports.create = (newEvent, callback) => {
-    newEvent.save(callback);
+    newEvent.save((err, res) => callback(err, res._id));
 }
 module.exports.delete = (id, callback) => {
-    let query = { _id: id };
+    let query = {
+        _id: id
+    };
     Event.deleteOne(query, callback);
 }
 module.exports.edit = (conditions, update, callback) => {
-    Event.findOneAndUpdate(conditions, update, { new: true }, callback);
+    Event.findOneAndUpdate(conditions, update, {
+        new: true
+    }, callback);
 }

@@ -64,17 +64,18 @@ router.post('/', (req, res, next) => {
         name: req.body.name,
         date: req.body.date,
         organizers: req.body.organizers,
-        participants: req.body.participants,
-        details: req.body.details
     });
+    if (req.body.participants) newEvent.participants = req.body.participants;
+    if (req.body.details) newEvent.details = req.body.details;
+
     console.log(`REG ${newEvent}`);
-    event.create(newEvent, (err, e) => {
+    event.create(newEvent, (err, id) => {
         if (err) {
             res.json({ success: false, message: `Failed to create a new event. Error: ${err}\n ${newEvent}` });
 
         }
         else
-            res.status(200).json({ success: true, message: "Added successfully." });
+            res.status(200).json({ success: true, message: "Added successfully.", id: newEvent._id});
     });
 });
 router.post('/edit/:id', (req, res) => {

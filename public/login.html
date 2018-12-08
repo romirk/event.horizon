@@ -120,7 +120,7 @@
                             if (res.data.success) {
                                 //$cookies.put('jwt', res.data.token);
                                 localStorage.setItem('jwt', res.data.token)
-                                window.location.replace('dash.html');
+                                window.location.replace('/');
                             } else {
                                 console.log("Failed: ", res.data.message);
                                 // $scope.showSimpleToast(res.data.message);
