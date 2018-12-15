@@ -27,18 +27,20 @@
                 <div class="mdl-layout-spacer"></div>
                 <!-- Navigation -->
                 <nav class="mdl-navigation">
-                    <a class="mdl-navigation__link" href="#" ng-click='logOut()' style='color: rgba(0, 0, 0, 0.87)'>Log out</a>
+                    <span style='color: rgba(0, 0, 0, 0.87); position: relative; right: 3vw;'>Welcome, {{payload.username}}</span>
                     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"
-                        ng-click="newEvent()">Create Event</button>
+                        ng-click="logOut()">Log out</button>
                 </nav>
             </div>
         </header>
         <div class="mdl-layout__drawer">
             <span class="mdl-layout-title">
-                <code style='color:inherit;background-color:inherit;'><!--<span style="color: rgb(147, 207, 56)">-->event.horizon</code>
+                <code style='color:inherit;background-color:inherit;'>
+                    <!--<span style="color: rgb(147, 207, 56)">-->event.horizon</code>
             </span>
             <nav class="mdl-navigation">
-                <!-- <a class="mdl-navigation__link" href="nov5.mp4">Piano</a> -->
+                <span style="position:  relative; left: 5vw">Hello, {{payload.username}}</span>
+                
                 <a class="mdl-navigation__link" href='login.html' ng-click="logOut()">Log out</a>
                 <hr>
                 <!-- <span style='margin:auto'>
@@ -48,7 +50,7 @@
 
         </div>
         <main class="mdl-layout__content" style="height:100%;">
-            <div class="title" style="padding:5vh 5vw 4vw 8vh;margin:auto;display:block;text-align: center">
+            <div class="title" style="padding:5vh 5vw 4vw 8vh;margin:auto;display:block;text-align: center; ">
                 <div class="mdl-grid" style="line-height:1;" layout="row" layout-sm="column" layout-wrap>
                     <div flex="{{Math.floor(points.c/points.total)*100}}" flex-sm="40" flex-xs="80" class="points c">
                         <code class="pts" id='c'>0</code>
@@ -67,7 +69,13 @@
             <div class="mdl-layout mdl-js-layout" id='2' name='2'>
 
                 <div class=cards>
-                    <h2 class="md-display-2"><code>events</code></h2>
+                    <div layout="row">
+                        <h2 class="md-display-2" flex="65">
+                            <code>events</code>
+                        </h2>
+                        <button style="position: relative; left: 10vw; top: 3vh" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"
+                            ng-click="newEvent()"><i class="material-icons">add</i> Create Event</button>
+                    </div>
                     <md-content class="md-padding" layout="row" layout-sm="column" layout-wrap id="cardwrap">
                         <md-card md-theme="dark-blue" ng-repeat="e in events" flex="30" flex-xs="80" flex-sm="80" id="{{e.name}}">
                             <img ng-src="assets/imgs/eventhorizon.jpg" class="md-card-image" alt="Washed Out">
