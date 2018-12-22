@@ -19,18 +19,18 @@
 
   <!-- Uses a transparent header that draws on top of the layout's background -->
   <div class="layout-transparent mdl-layout mdl-js-layout">
-    <header class="mdl-layout__header mdl-layout__header--transparent">
+    <header class="mdl-layout__header">
       <div class="mdl-layout__header-row">
         <!-- Title -->
         <span class="mdl-layout-title">
-          <code style='color:inherit;background-color:inherit;font-size: 110%;'>event.horizon</code>
+          <code style='color:white;background-color:inherit;font-size: 110%;'>event.horizon</code>
         </span>
         <!-- Add spacer, to align navigation to the right -->
         <div class="mdl-layout-spacer"></div>
         <!-- Navigation -->
         <nav class="mdl-navigation">
           <!-- <a class="mdl-navigation__link" href="nov5.mp4">Piano</a> -->
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" ng-click="logOut()">Log
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" ng-click="logOut()">Log
             out</button>
         </nav>
       </div>
@@ -51,7 +51,7 @@
         <h4 class="md-headline" style="padding-left: 0.77vw"><code id='type' contenteditable="false">{{event.type}}</code></h4>
       </div>
       <div class="mdl-layout mdl-js-layout main">
-        <b class="md-title">Date:&nbsp;&nbsp;<span class="" id="date" contenteditable="false">{{event.date | date}}</span></b>
+        <b class="md-title">Date:&nbsp;&nbsp;<md-datepicker id="date-picker" ng-model="data.date" md-placeholder="Enter date" md-open-on-focus></md-datepicker><span class="" id="date" contenteditable="false">{{event.date | date}}</span></b>
         <br /><br />
         <b class="md-title">Details<br><br></b><span class="" id="details" contenteditable="false">{{event.details}}</span>
 
@@ -65,6 +65,27 @@
       <button class="mdl-snackbar__action" type="button"></button>
   </div>
 <input type="hidden" id='e' value=true>
+<div id="id01" class="w3-modal">
+  <div class="w3-modal-content">
+
+    <header class="w3-container w3-teal"> 
+      <span onclick="document.getElementById('id01').style.display='none'" 
+      class="w3-button w3-display-topright">&times;</span>
+      <h2>Modal Header</h2>
+    </header>
+
+    <div class="w3-container">
+      <p>Some text..</p>
+      <p>Some text..</p>
+    </div>
+
+    <footer class="w3-container w3-teal">
+      <p>Modal Footer</p>
+    </footer>
+
+  </div>
+</div>
+
   </div>
 
 

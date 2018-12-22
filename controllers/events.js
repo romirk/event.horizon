@@ -65,6 +65,7 @@ router.post('/', (req, res, next) => {
         date: req.body.date,
         organizers: req.body.organizers,
     });
+    //var id = newEvent._id;
     if (req.body.participants) newEvent.participants = req.body.participants;
     if (req.body.details) newEvent.details = req.body.details;
 

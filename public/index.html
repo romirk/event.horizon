@@ -13,10 +13,10 @@
 
 </head>
 
-<body ng-app="event.horizon" ng-init="init()" ng-controller="dash">
+<body>
 
     <!-- Uses a transparent header that draws on top of the layout's background -->
-    <div class="layout-transparent mdl-layout mdl-js-layout wrapper">
+    <div ng-app="event.horizon" ng-init="init()" ng-controller="dash" class="layout-transparent mdl-layout mdl-js-layout wrapper">
         <header class="mdl-layout__header mdl-layout__header--transparent">
             <div class="mdl-layout__header-row">
                 <!-- Title -->
@@ -103,7 +103,25 @@
         <span style="margin:auto;">Coded with &hearts; by <a href="http://www.instagram.com/romir.k">romir.k</a></span>
     </footer> -->
     </main>
+    <div id="id01" class="w3-modal">
+    <div class="w3-modal-content">
+  
+      <header class="w3-container w3-teal"> 
+        <span onclick="document.getElementById('id01').style.display='none'" 
+        class="w3-button w3-display-topright">&times;</span>
+        <h2 ng-model="modEvent.name">Modal Header</h2>
+      </header>
+  
+      <div class="w3-container" ng-model="">
 
+      </div>
+  
+      <footer class="w3-container w3-teal">
+        <p>Modal Footer</p>
+      </footer>
+  
+    </div>
+  </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.min.js"></script>

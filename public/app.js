@@ -78,7 +78,9 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
             }
         }
         $scope.goEvent = (id) => {
-            window.location.assign("events.html?e=" + String(id));
+            m = document.getElementById('id01').style.display='block';
+            
+            m.style.display='block';
         }
         $scope.countUp = (id, start, end, duration) => {
             // assumes integer values for start and end
@@ -115,6 +117,7 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
         }
         $scope.newEvent = () => window.location.replace("events.html?e=new");
     })
+
     /**
      * controller for events page
      */
@@ -146,20 +149,19 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
                                 }
                                 document.getElementById('name').setAttribute('contenteditable', true);
                                 document.getElementById('details').setAttribute('contenteditable', true);
-                                document.getElementById('date').setAttribute('contenteditable', true);
+                                document.getElementById('date-picker').setAttribute('ng-hide', false);
                                 document.getElementById('edit').innerHTML = 'save';
                                 document.getElementById('e').value = false;
-
                                 $scope.edit = () => {
-                                    var data = {
+                                    data = {
                                         name: document.getElementById('name').innerHTML,
-                                        date: document.getElementById('date').innerHTML,
+                                        date: $scope.data.date,
                                         details: document.getElementById('details').innerHTML,
                                         organizers: [$scope.payload.username]
                                     }
                                     console.log('edited', data)
                                     $http.post('http://localhost:3000/event/', data).then(() => {
-                                        if (res.data.success) window.location.replace('/#' + data.name);
+                                        if (res.data.success) window.location.replace('/events.html?e=' + res.data.id);
                                         else showSnack(res.data.message);
                                     });
                                 }
@@ -169,7 +171,7 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
                                     if (document.getElementById('e').value == 'true') {
                                         document.getElementById('name').setAttribute('contenteditable', true);
                                         document.getElementById('details').setAttribute('contenteditable', true);
-                                        document.getElementById('date').setAttribute('contenteditable', true);
+                                        document.getElementById('date-picker').setAttribute('ng-hide', false);
                                         document.getElementById('edit').innerHTML = 'save';
                                         document.getElementById('e').value = false;
                                         console.log(document.getElementById('e').value)
@@ -178,7 +180,7 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
                                             id: $scope.event._id,
                                             update: {
                                                 name: document.getElementById('name').innerHTML,
-                                                date: document.getElementById('date').innerHTML,
+                                                date: $scope.data.date,
                                                 details: document.getElementById('details').innerHTML
                                             }
                                         }
