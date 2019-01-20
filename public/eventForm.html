@@ -3,9 +3,17 @@
 
 <head>
     <title>Create Event</title>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="assets/css/dash.css" />
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
+    <script src="assets/js/swup.min.js"></script>
 
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-    <style type="text/css">
+    <!-- <style type="text/css">
         .form-style-8 {
             font-family: 'Open Sans Condensed', arial, sans;
             /*width: 500px;*/
@@ -104,6 +112,168 @@
         <textarea placeholder="Details" onkeyup="adjust_textarea(this)"></textarea>
         <input type="button" value="Create Event" />
     </form>
-</div>
+</div> -->
+
+<body ng-app="event.horizon" ng-controller="creator" ng-init="init()">
+    <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
+        <div>
+            <h1>Create Event</h1> <br>
+        </div>
+
+        <!-- </md-content>
+
+    <md-content layout-padding> -->
+        <div>
+            <form name="eventForm">
+                <div>
+                    <md-input-container>
+                        <label>Name</label>
+                        <input ng-model="event.name">
+                    </md-input-container>
+
+                    <!-- <md-input-container>
+                <label>Email</label>
+                <input ng-model="event.email" type="email">
+            </md-input-container> -->
+                </div>
+                <div layout-gt-xs="row">
+                    <md-input-container class="md-block" flex-gt-xs>
+                        <label>Type</label>
+                        <input ng-model="event.type">
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label>Date</label>
+                        <md-datepicker ng-model="event.date"></md-datepicker>
+                    </md-input-container>
+                </div>
+
+                <!-- <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>First name</label>
+                        <input ng-model="event.firstName">
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Long Last Name That Will Be Truncated And 3 Dots (Ellipsis) Will Appear At The End</label>
+                        <input ng-model="theMax">
+                    </md-input-container>
+                </div> -->
+
+                <md-input-container class="md-block">
+                    <label>Address</label>
+                    <input ng-model="event.address">
+                </md-input-container>
+
+                <md-input-container md-no-float class="md-block">
+                    <input ng-model="event.address2" placeholder="Address 2">
+                </md-input-container>
+
+                <!-- <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>City</label>
+                        <input ng-model="event.city">
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>State</label>
+                        <md-select ng-model="event.grade">
+                            <md-option ng-repeat="grade in grades" value="{{grade.abbrev}}">
+                                {{state.abbrev}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Postal Code</label>
+                        <input name="postalCode" ng-model="event.postalCode" placeholder="12345" required ng-pattern="/^[0-9]{5}$/"
+                            md-maxlength="5">
+
+                        <div ng-messages="eventForm.postalCode.$error" role="alert" multiple>
+                            <div ng-message="required" class="my-message">You must supply a postal code.</div>
+                            <div ng-message="pattern" class="my-message">That doesn't look like a valid postal
+                                code.
+                            </div>
+                            <div ng-message="md-maxlength" class="my-message">
+                                Don't use the long version silly...we don't need to be that specific...
+                            </div>
+                        </div>
+                    </md-input-container>
+                </div> -->
+
+                <md-input-container class="md-block">
+                    <label>Details</label>
+                    <textarea ng-model="event.details" md-maxlength="150" rows="10" md-select-on-focus></textarea>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <md-button type=submit ng-click="edit()" class="md-raised md-primary">SUBMIT</md-button>
+                </md-input-container>
+
+            </form>
+        </div>
+    </md-content>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-messages.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-resource.js"></script>
+
+    <!-- Angular Material Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
+    <script src='app.js'></script>
+    <script>
+        var app = angular.module('event.horizon', ['ngMaterial', 'ngMessages', 'ngResource']);
+        app.controller("creator", ($scope, $http) => {
+
+                $scope.grades = ("1 2 3 4 5 6 7 8 9 10 11 12").split(' ').map(function (state) {
+                    return {
+                        abbrev: state
+                    };
+                });
+
+                $scope.init = () => {
+                    console.log(localStorage.getItem('jwt'));
+                    if (localStorage.getItem('jwt') /*$cookies.get('jwt')*/ )
+                        $http.post("http://lvh.me:3000/auth/verify", {
+                            token: localStorage.getItem('jwt')
+                        }).then((res) => {
+                            if (!res.data.success) {
+                                localStorage.removeItem('jwt');
+                                window.location.replace("login");
+                            } else {
+                                $scope.payload = res.data.payload;
+                                $scope.event = {
+                                    name: '',
+                                    date: '',
+                                    details: '',
+                                    organizers: [$scope.payload.username]
+                                }
+                                $scope.edit = () => {
+                                    console.log('edited', $scope.event)
+                                    $http.post('http://lvh.me:3000/event/new', $scope.event).then(() => {
+                                        if (res.data.success) window.location.replace('/events.html?e=' + res.data.id);
+                                        else showSnack(res.data.message);
+                                    });
+                                }
+                            }
+                        }, () => {
+                            window.location.replace("login");
+                        });
+                    else {
+                        window.location.replace("login");
+                    }
+                }
+            })
+            .config(function ($mdThemingProvider) {
+
+                // Configure a dark theme with primary foreground yellow
+
+                $mdThemingProvider.theme('docs-dark', 'default')
+                    .primaryPalette('yellow')
+                    .dark();
+
+            });
+    </script>
+</body>
 
 </html>

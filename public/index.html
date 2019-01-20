@@ -10,10 +10,11 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="assets/css/dash.css" />
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
+    <script src="assets/js/swup.min.js"></script>
 
 </head>
 
-<body>
+<body id="swup">
 
     <!-- Uses a transparent header that draws on top of the layout's background -->
     <div ng-app="event.horizon" ng-init="init()" ng-controller="dash" class="layout-transparent mdl-layout mdl-js-layout wrapper">
@@ -27,7 +28,8 @@
                 <div class="mdl-layout-spacer"></div>
                 <!-- Navigation -->
                 <nav class="mdl-navigation">
-                    <span style='color: rgba(0, 0, 0, 0.87); position: relative; right: 3vw;'>Welcome, {{payload.username}}</span>
+                    <span style='color: rgba(0, 0, 0, 0.87); position: relative; right: 3vw;'>Welcome,
+                        {{payload.username}}</span>
                     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"
                         ng-click="logOut()">Log out</button>
                 </nav>
@@ -40,7 +42,7 @@
             </span>
             <nav class="mdl-navigation">
                 <span style="position:  relative; left: 5vw">Hello, {{payload.username}}</span>
-                
+
                 <a class="mdl-navigation__link" href='login.html' ng-click="logOut()">Log out</a>
                 <hr>
                 <!-- <span style='margin:auto'>
@@ -104,25 +106,27 @@
     </footer> -->
     </main>
     <div id="id01" class="w3-modal">
-    <div class="w3-modal-content">
-  
-      <header class="w3-container w3-teal"> 
-        <span onclick="document.getElementById('id01').style.display='none'" 
-        class="w3-button w3-display-topright">&times;</span>
-        <h2 ng-model="modEvent.name">Modal Header</h2>
-      </header>
-  
-      <div class="w3-container" ng-model="">
+        <div class="w3-modal-content">
 
-      </div>
-  
-      <footer class="w3-container w3-teal">
-        <p>Modal Footer</p>
-      </footer>
-  
+            <header class="w3-container w3-teal">
+                <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                <h2 ng-model="modEvent.name" id="modname">{{modEvent.name}}</h2>
+            </header>
+
+            <div class="w3-container" ng-model="modEvent.name" id="moddetails">
+
+            </div>
+
+            <footer class="w3-container w3-teal">
+                ...
+            </footer>
+
+        </div>
     </div>
-  </div>
     </div>
+    <script>
+        const swup = new Swup();
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-aria.min.js"></script>
@@ -132,7 +136,6 @@
     <!-- Angular Material Library -->
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
     <script src='app.js'></script>
-
 </body>
 
 </html>

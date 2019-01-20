@@ -78,8 +78,10 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
             }
         }
         $scope.goEvent = (id) => {
-            m = document.getElementById('id01').style.display='block';
-            
+            m = document.getElementById('id01');
+            $scope.modEvent = search(id, $scope.events);
+            document.getElementById('modname').innerHTML = $scope.modEvent.name;
+            document.getElementById('moddetails').innerHTML= '<span>' + $scope.modEvent.date + '<span><p>' + $scope.modEvent.details + '</p>';
             m.style.display='block';
         }
         $scope.countUp = (id, start, end, duration) => {
@@ -225,4 +227,33 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
             localStorage.removeItem('jwt');
             window.location.replace("login");
         }
+    })
+    .controller("act", ($scope, $http) => {
+
+        $scope.init = () => {
+            console.log(localStorage.getItem('jwt'));
+            if (localStorage.getItem('jwt') /*$cookies.get('jwt')*/ )
+                $http.post("http://lvh.me:3000/auth/verify", {
+                    token: localStorage.getItem('jwt')
+                }).then((res) => {
+                    if (!res.data.success) {
+                        localStorage.removeItem('jwt');
+                        window.location.replace("login");
+                    } else {
+                        $scope.payload = res.data.payload;
+                    }
+                }, () => {
+                    window.location.replace("login");
+                });
+            else {
+                window.location.replace("login");
+            }
+        }
     });
+    function search(id, myArray){
+        for (var i=0; i < myArray.length; i++) {
+            if (myArray[i]._id === id) {
+                return myArray[i];
+            }
+        }
+    }

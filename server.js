@@ -26,6 +26,7 @@ app.use('/auth', auth);
 
 //Declaring Port
 const port = 3000;
+const host = '0.0.0.0';
 
 //Middleware for CORS
 app.use(cors({
@@ -59,7 +60,7 @@ app.use(function (req, res, next) {
             fs.exists(file, function (exists) {
                 if (exists)
                     req.url = req.url.substring(0, req.path.indexOf('?')) + '.html' + req.path.substring(req.path.indexOf('?'));
-                    console.log(req.url);
+                console.log(req.url);
                 next();
             });
         }
@@ -92,6 +93,6 @@ app.use(function (req, res, next) {
 });
 
 //Listen to port 3000
-app.listen(port, () => {
-    console.log(`Starting the server at port ${port}`);
+app.listen(port, host, () => {
+    console.log(`Starting the server at ${host}:${port}`);
 });
