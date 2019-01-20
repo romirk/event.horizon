@@ -241,20 +241,24 @@
                                 localStorage.removeItem('jwt');
                                 window.location.replace("login");
                             } else {
-                                $scope.payload = res.data.payload;
-                                $scope.event = {
-                                    name: '',
-                                    date: '',
-                                    details: '',
-                                    organizers: [$scope.payload.username]
-                                }
-                                $scope.edit = () => {
-                                    console.log('edited', $scope.event)
-                                    $http.post('http://lvh.me:3000/event/new', $scope.event).then(() => {
-                                        if (res.data.success) window.location.replace('/events.html?e=' + res.data.id);
-                                        else showSnack(res.data.message);
-                                    });
-                                }
+                               
+                                    $scope.payload = res.data.payload; 
+                                    if ($scope.payload.status === 'admin') {
+                                    $scope.event = {
+                                        name: '',
+                                        date: '',
+                                        details: '',
+                                        organizers: [$scope.payload.username]
+                                    }
+                                    $scope.edit = () => {
+                                        console.log('edited', $scope.event)
+                                        $http.post('http://lvh.me:3000/event/', $scope.event).then(() => {
+                                            if (res.data.success) window.location.replace(
+                                                '/events.html?e=' + res.data.id);
+                                            else showSnack(res.data.message);
+                                        });
+                                    }
+                                } else window.location.replace("login");
                             }
                         }, () => {
                             window.location.replace("login");

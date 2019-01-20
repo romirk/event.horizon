@@ -22,7 +22,7 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
     /**
      * controller for dashboard
      */
-    .controller('dash', function ($scope, $http) {
+    .controller('dash', function ($scope, $http, $window) {
         $scope.points = {
             c: 187,
             e: 190,
@@ -32,7 +32,7 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
         $scope.points.max = Math.max($scope.points.c, $scope.points.e, $scope.points.p, $scope.points.v);
         $scope.points.total = $scope.points.c + $scope.points.e + $scope.points.p + $scope.points.v;
         console.log($scope.points);
-        $http.get(url).then(
+        $http.get("http://lvh.me:3000/event/").then(
             (res) => {
                 if (res.data.success) {
                     if (res.data.events.length == 0) document.getElementById('cardwrap').innerHTML = "<h2 style='margin:auto; text-align:center'><code style='color: #444'>no events</code></h2>";
@@ -118,6 +118,28 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
             window.location.replace("login");
         }
         $scope.newEvent = () => window.location.replace("events.html?e=new");
+        $scope.register = (id) => {
+            var event = search(id, $scope.events);
+            console.log(event.participants, event.participants.indexOf($scope.payload.username));
+            if(event.participants.indexOf($scope.payload.username) < 0) {
+                event.participants.push($scope.payload.username);
+                console.log(event.participants);
+                var data = {
+                    update: {
+                        participants: event.participants
+                    }
+                };
+                $http.post('http://localhost:3000/event/edit/' + String(id), data).then((res) => {
+                    console.log(res);
+                    if (res.data.success) window.location.reload();
+                    else showSnack(res.data.message);
+                });
+            } else {
+                console.log("Already participating");
+                $window.alert("Already participating")
+            }
+            
+        }
     })
 
     /**
@@ -229,6 +251,14 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
         }
     })
     .controller("act", ($scope, $http) => {
+        
+        $scope.goEvent = (id) => {
+            m = document.getElementById('id01');
+            $scope.modEvent = search(id, $scope.events);
+            document.getElementById('modname').innerHTML = $scope.modEvent.name;
+            document.getElementById('moddetails').innerHTML= '<span>' + $scope.modEvent.date + '<span><p>' + $scope.modEvent.details + '</p>';
+            m.style.display='block';
+        }
 
         $scope.init = () => {
             console.log(localStorage.getItem('jwt'));
@@ -241,6 +271,28 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
                         window.location.replace("login");
                     } else {
                         $scope.payload = res.data.payload;
+                        $http.get("http://lvh.me:3000/event/").then(
+                            (res) => {
+                                if (res.data.success) {
+                                    if (res.data.events.length == 0) document.getElementById('cardwrap').innerHTML = "<h2 style='margin:auto; text-align:center'><code style='color: #444'>no events</code></h2>";
+                                    console.log(res);
+                                    $scope.data = res.data;
+                                    $scope.events = res.data.events;
+                                    $scope.participating = $scope.events.filter(function (el) { return el.participants.indexOf($scope.payload.username) >= 0 });
+                                    $scope.organizing = $scope.events.filter(function (el) { return el.organizers.indexOf($scope.payload.username) >= 0 });
+                                    console.log($scope.participating, $scope.organizing);
+                                } else {
+                                    console.log(res.data.message);
+                                    //document.getElementById('cardwrap').innerHTML = "<h2 style='margin:auto; text-align:center'><code style='color: #444'>no events</code></h2>";
+
+                                }
+
+                            },
+                            (err) => {
+                                console.log(err);
+                                //document.getElementById('cardwrap').innerHTML = "<h2 style='margin:auto; text-align:center'><code style='color: #444'>no events</code></h2>";
+                            }
+                        );
                     }
                 }, () => {
                     window.location.replace("login");
