@@ -14,10 +14,10 @@
 
 </head>
 
-<body id="swup">
+<body id="swup"ng-app="event.horizon" ng-init="init()" ng-controller="dash">
 
     <!-- Uses a transparent header that draws on top of the layout's background -->
-    <div ng-app="event.horizon" ng-init="init()" ng-controller="dash" class="layout-transparent mdl-layout mdl-js-layout wrapper">
+    <div class="layout-transparent mdl-layout mdl-js-layout wrapper">
         <header class="mdl-layout__header mdl-layout__header--transparent">
             <div class="mdl-layout__header-row">
                 <!-- Title -->
@@ -42,7 +42,7 @@
             </span>
             <nav class="mdl-navigation">
                 <span style="position:  relative; left: 5vw">Hello, {{payload.username}}</span>
-
+                <a class="mdl-navigation__link" href='act.html'>My Activities</a>
                 <a class="mdl-navigation__link" href='login.html' ng-click="logOut()">Log out</a>
                 <hr>
                 <!-- <span style='margin:auto'>
@@ -100,30 +100,31 @@
                 </div>
             </div>
         </main>
+        <div id="id01" class="w3-modal">
+                <div class="w3-modal-content">
+        
+                    <header class="w3-container w3-teal">
+                        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                        <h2 ng-model="modEvent.name" id="modname">{{modEvent.name}}</h2>
+                    </header>
+        
+                    <div class="w3-container" ng-model="modEvent.name" id="moddetails">
+        
+                    </div>
+        
+                    <footer class="w3-container w3-teal">
+                        <md-content>
+                            <md-button class="md-accent md-raised" id="mreg" ng-click="register(e._id)">Register</md-button>
+                        </md-content>
+                    </footer>
+        
+                </div>
+            </div>
     </div>
     <!-- <footer>
         <span style="margin:auto;">Coded with &hearts; by <a href="http://www.instagram.com/romir.k">romir.k</a></span>
     </footer> -->
     </main>
-    <div id="id01" class="w3-modal">
-        <div class="w3-modal-content">
-
-            <header class="w3-container w3-teal">
-                <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                <h2 ng-model="modEvent.name" id="modname">{{modEvent.name}}</h2>
-            </header>
-
-            <div class="w3-container" ng-model="modEvent.name" id="moddetails">
-
-            </div>
-
-            <footer class="w3-container w3-teal">
-                ...
-            </footer>
-
-        </div>
-    </div>
-    </div>
     <script>
         const swup = new Swup();
     </script>

@@ -79,9 +79,12 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
         }
         $scope.goEvent = (id) => {
             m = document.getElementById('id01');
+            console.log(String($scope.modEvent.date));
+            var d =  Date(String($scope.modEvent.date));
             $scope.modEvent = search(id, $scope.events);
             document.getElementById('modname').innerHTML = $scope.modEvent.name;
-            document.getElementById('moddetails').innerHTML= '<span>' + $scope.modEvent.date + '<span><p>' + $scope.modEvent.details + '</p>';
+            document.getElementById('mreg').setAttribute('ng-click', $scope.modEvent._id);
+            document.getElementById('moddetails').innerHTML= '<span>' + d.getDate() + '.' + d.getMonth() + '.' + getDate() + '<span><p>' + $scope.modEvent.details + '</p>';
             m.style.display='block';
         }
         $scope.countUp = (id, start, end, duration) => {

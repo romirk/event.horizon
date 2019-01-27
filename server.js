@@ -3,14 +3,14 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-var fs = require('fs');
+const fs = require('fs');
 
 const users = require('./controllers/users');
 const events = require('./controllers/events');
 const config = require('./config/config');
 const auth = require('./controllers/authenticate')
 
-var publicdir = __dirname + '/public';
+const publicdir = __dirname + '/public';
 
 mongoose.connect(config.database, {
     useNewUrlParser: true
