@@ -69,6 +69,7 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
                         window.location.replace("login");
                     } else {
                         $scope.payload = res.data.payload;
+                        if($scope.payload.status != 'admin') document.getElementById('ce').setAttribute('hidden', 'true');
                     }
                 }, () => {
                     window.location.replace("login");
@@ -79,13 +80,17 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
         }
         $scope.goEvent = (id) => {
             m = document.getElementById('id01');
-            console.log(String($scope.modEvent.date));
-            var d =  Date(String($scope.modEvent.date));
             $scope.modEvent = search(id, $scope.events);
+            var d = new Date(String($scope.modEvent.date));
+            $scope.modEvent.d =  d.getFullYear() + '.' + d.getMonth() + '.' + d.getDate();
             document.getElementById('modname').innerHTML = $scope.modEvent.name;
-            document.getElementById('mreg').setAttribute('ng-click', $scope.modEvent._id);
-            document.getElementById('moddetails').innerHTML= '<span>' + d.getDate() + '.' + d.getMonth() + '.' + getDate() + '<span><p>' + $scope.modEvent.details + '</p>';
+            //document.getElementById('mreg').setAttribute('ng-click', $scope.modEvent._id);
+            //document.getElementById('moddetails').innerHTML= '<span>' + d.getFullYear() + '.' + d.getMonth() + '.' + d.getDate() + '<span><p>' + $scope.modEvent.details + '</p>';
             m.style.display='block';
+        }
+        $scope.edit = (id) => {
+            console.log(id);
+            window.location.replace('eventEdit.html?e=' + String(id));
         }
         $scope.countUp = (id, start, end, duration) => {
             // assumes integer values for start and end
@@ -120,7 +125,7 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
             localStorage.removeItem('jwt');
             window.location.replace("login");
         }
-        $scope.newEvent = () => window.location.replace("events.html?e=new");
+        $scope.newEvent = () => window.location.replace("eventForm.html");
         $scope.register = (id) => {
             var event = search(id, $scope.events);
             console.log(event.participants, event.participants.indexOf($scope.payload.username));

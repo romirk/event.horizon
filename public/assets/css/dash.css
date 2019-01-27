@@ -16,7 +16,7 @@ body,
 html {
     height: 100%;
     line-height: 1;
-    background-color: #c4d4e0;
+    /* background-color: #fa991c; */
 }
 .progress 
 {
@@ -64,7 +64,9 @@ html {
     /*padding-top: 5vw;
     padding-bottom: 5vw;*/
 }
-
+ #cardwrap {
+    background-color: #fa991c;
+} 
 .points {
     border-bottom: 5px solid;
     padding-bottom: 4px;
@@ -111,6 +113,7 @@ html {
     /* This background is dark, so we set text to white. Use 87% black instead if
 your background is light. */
     color: rgba(0, 0, 0, 0.87);
+    background-color:#fa991c;
 }
 
 .title {

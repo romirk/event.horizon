@@ -14,11 +14,11 @@
 
 </head>
 
-<body id="swup"ng-app="event.horizon" ng-init="init()" ng-controller="dash">
+<body id="swup" ng-app="event.horizon" ng-init="init()" ng-controller="dash">
 
     <!-- Uses a transparent header that draws on top of the layout's background -->
     <div class="layout-transparent mdl-layout mdl-js-layout wrapper">
-        <header class="mdl-layout__header mdl-layout__header--transparent">
+        <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
                 <!-- Title -->
                 <span class="mdl-layout-title">
@@ -31,7 +31,7 @@
                     <span style='color: rgba(0, 0, 0, 0.87); position: relative; right: 3vw;'>Welcome,
                         {{payload.username}}</span>
                     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"
-                        ng-click="logOut()">Log out</button>
+                        style="background-color: #032539" ng-click="logOut()">Log out</button>
                 </nav>
             </div>
         </header>
@@ -52,7 +52,7 @@
 
         </div>
         <main class="mdl-layout__content" style="height:100%;">
-            <div class="title" style="padding:5vh 5vw 4vw 8vh;margin:auto;display:block;text-align: center; ">
+            <div class="title" style="padding:5vh 5vw 4vw 8vh;margin:auto;display:block;text-align: center;">
                 <div class="mdl-grid" style="line-height:1;" layout="row" layout-sm="column" layout-wrap>
                     <div flex="{{Math.floor(points.c/points.total)*100}}" flex-sm="40" flex-xs="80" class="points c">
                         <code class="pts" id='c'>0</code>
@@ -75,15 +75,36 @@
                         <h2 class="md-display-2" flex="65">
                             <code>events</code>
                         </h2>
-                        <button style="position: relative; left: 10vw; top: 3vh" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"
-                            ng-click="newEvent()"><i class="material-icons">add</i> Create Event</button>
+                        <button style="position: relative; top: 3vh; left: 17vw;background-color: #032539" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"
+                            ng-click="newEvent()" id="ce"><i class="material-icons">add</i> Create Event </button>
                     </div>
                     <md-content class="md-padding" layout="row" layout-sm="column" layout-wrap id="cardwrap">
-                        <md-card md-theme="dark-blue" ng-repeat="e in events" flex="30" flex-xs="80" flex-sm="80" id="{{e.name}}">
-                            <img ng-src="assets/imgs/eventhorizon.jpg" class="md-card-image" alt="Washed Out">
+                        <md-card md-theme="dark-blue" ng-repeat="e in events" flex="30" flex-xs="80" flex-sm="80" id="{{e.name}}"
+                            style="background-color: #1c768f">
+                            <!-- <img ng-src="assets/imgs/eventhorizon.jpg" class="md-card-image" alt="Washed Out"> -->
+                            <div style="height: 3vh; background-color: #032539"></div>
                             <md-card-title>
                                 <md-card-title-text>
                                     <span class="md-headline">{{e.name}}</span>
+                                    <!-- <md-menu>
+                                            <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="dash.openMenu($mdMenu, $event)">
+                                              <i class="material-icons" id="edit">edit</i>
+                                            </md-button>
+                                            <md-menu-content width="4">
+                                              <md-menu-item>
+                                                <md-button ng-click="ctrl.redial($event)">
+                                                  Redial
+                                                </md-button>
+                                              </md-menu-item>
+                                              
+                                              <md-menu-divider></md-menu-divider>
+                                              <md-menu-item>
+                                                <md-button ng-click="ctrl.toggleNotifications()">
+                                                  {{ctrl.notificationsEnabled ? 'Disable' : 'Enable' }} notifications
+                                                </md-button>
+                                              </md-menu-item>
+                                            </md-menu-content>
+                                          </md-menu> -->
                                 </md-card-title-text>
                             </md-card-title>
                             <md-card-content>
@@ -93,7 +114,7 @@
                             </md-card-content>
                             <md-card-actions layout="row" layout-align="end center">
                                 <md-button ng-click="goEvent(e._id)">Details</md-button>
-                                <md-button class="md-accent md-raised" ng-click="register(e._id)">Register</md-button>
+                                <md-button class="md-accent md-raised" ng-click="register(e._id)" style="background-color: #032539">Register</md-button>
                             </md-card-actions>
                         </md-card>
                     </md-content>
@@ -101,25 +122,35 @@
             </div>
         </main>
         <div id="id01" class="w3-modal">
-                <div class="w3-modal-content">
-        
-                    <header class="w3-container w3-teal">
-                        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                        <h2 ng-model="modEvent.name" id="modname">{{modEvent.name}}</h2>
-                    </header>
-        
-                    <div class="w3-container" ng-model="modEvent.name" id="moddetails">
-        
-                    </div>
-        
-                    <footer class="w3-container w3-teal">
+            <div class="w3-modal-content w3-animate-opacity" style="height: 30vh">
+
+                <header class="w3-container w3-teal">
+                    <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                    <h2 ng-model="modEvent.name" id="modname">{{modEvent.name}}</h2>
+                </header>
+
+                <div class="w3-container" ng-model="modEvent.name" id="moddetails">
+                    <p>
+                        <b>DATE</b> {{modEvent.d}}
+                    </p>
+                    <p>
+                        <B>DETAILS</B><br />
+                        {{modEvent.details}}
+                    </p>
+                    <!-- <md-content>
+                            <md-button class="md-accent" id="mreg" ng-click="edit(modEvent._id))" id="ce">Edit</md-button>
+                    </md-content> -->
+                    <a href="eventEdit.html?e={{modEvent._id}}">Edit</a>
+                </div>
+
+                <!-- <footer class="w3-container w3-teal">
                         <md-content>
                             <md-button class="md-accent md-raised" id="mreg" ng-click="register(e._id)">Register</md-button>
                         </md-content>
-                    </footer>
-        
-                </div>
+                    </footer> -->
+
             </div>
+        </div>
     </div>
     <!-- <footer>
         <span style="margin:auto;">Coded with &hearts; by <a href="http://www.instagram.com/romir.k">romir.k</a></span>

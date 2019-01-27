@@ -20,7 +20,8 @@ const EventSchema = mongoose.Schema({
     participants: [{
         type: String
     }],
-    details: String
+    details: String,
+    type: String
 });
 
 const Event = module.exports = mongoose.model('Event', EventSchema, 'events');
