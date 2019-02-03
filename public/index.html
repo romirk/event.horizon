@@ -35,16 +35,17 @@
                 </nav>
             </div>
         </header>
-        <div class="mdl-layout__drawer">
-            <span class="mdl-layout-title">
-                <code style='color:inherit;background-color:inherit;'>
-                    <!--<span style="color: rgb(147, 207, 56)">-->event.horizon</code>
+        <div class="mdl-layout__drawer" style="color: white">
+            <span class="mdl-layout-title" style="background-color: #007ed9;">
+                <code style='color:inherit;'>
+                    <!--<span style="color: rgb(147, 207, 56)">-->event.horizon
+                    </code>
+                        <br><span style="margin: auto; background-color: #007ed9">Hello, {{payload.username}}</span>
             </span>
             <nav class="mdl-navigation">
-                <span style="position:  relative; left: 5vw">Hello, {{payload.username}}</span>
                 <a class="mdl-navigation__link" href='act.html'>My Activities</a>
                 <a class="mdl-navigation__link" href='login.html' ng-click="logOut()">Log out</a>
-                <hr>
+                
                 <!-- <span style='margin:auto'>
                     Coded with &hearts; by <a href="http://www.instagram.com/romir.k">romir.k</a>
                 </span> -->
@@ -81,8 +82,8 @@
                     <md-content class="md-padding" layout="row" layout-sm="column" layout-wrap id="cardwrap">
                         <md-card md-theme="dark-blue" ng-repeat="e in events" flex="30" flex-xs="80" flex-sm="80" id="{{e.name}}"
                             style="background-color: #1c768f">
-                            <!-- <img ng-src="assets/imgs/eventhorizon.jpg" class="md-card-image" alt="Washed Out"> -->
-                            <div style="height: 3vh; background-color: #032539"></div>
+                            <img ng-src="assets/imgs/eventhorizon.jpg" class="md-card-image" alt="Washed Out">
+                            <!-- <div style="height: 3vh; background-color: #032539"></div> -->
                             <md-card-title>
                                 <md-card-title-text>
                                     <span class="md-headline">{{e.name}}</span>
@@ -126,21 +127,22 @@
 
                 <header class="w3-container w3-teal">
                     <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                    <h2 ng-model="modEvent.name" id="modname">{{modEvent.name}}</h2>
+                    <h2 ng-model="modEvent.name" id="modname">{{modEvent.name}}</h2>          
                 </header>
 
                 <div class="w3-container" ng-model="modEvent.name" id="moddetails">
                     <p>
                         <b>DATE</b> {{modEvent.d}}
+                        <br> <B> TYPE</b> {{modEvent.type}}
                     </p>
                     <p>
                         <B>DETAILS</B><br />
                         {{modEvent.details}}
                     </p>
+                    <footer class="w3-container w3-teal" style="position:relative; bottom:2vh"><span class="w3-button w3-ripple w3-display-right" ><a href="eventEdit.html?e={{modEvent._id}}">edit</a></span></footer>
                     <!-- <md-content>
                             <md-button class="md-accent" id="mreg" ng-click="edit(modEvent._id))" id="ce">Edit</md-button>
                     </md-content> -->
-                    <a href="eventEdit.html?e={{modEvent._id}}">Edit</a>
                 </div>
 
                 <!-- <footer class="w3-container w3-teal">
@@ -150,6 +152,10 @@
                     </footer> -->
 
             </div>
+        </div>
+        <div id="snackbar" class="mdl-js-snackbar mdl-snackbar">
+            <div class="mdl-snackbar__text"></div>
+            <button class="mdl-snackbar__action" type="button"></button>
         </div>
     </div>
     <!-- <footer>
@@ -164,8 +170,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-aria.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-messages.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-resource.js"></script>
-
-    <!-- Angular Material Library -->
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
     <script src='app.js'></script>
 </body>

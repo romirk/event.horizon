@@ -65,7 +65,8 @@ html {
     padding-bottom: 5vw;*/
 }
  #cardwrap {
-    background-color: #fa991c;
+    background-color: #007ed9;
+    /*background-color: #fa991c;*/
 } 
 .points {
     border-bottom: 5px solid;
@@ -112,8 +113,10 @@ html {
 .layout-transparent .mdl-layout__drawer-button {
     /* This background is dark, so we set text to white. Use 87% black instead if
 your background is light. */
-    color: rgba(0, 0, 0, 0.87);
-    background-color:#fa991c;
+    color: white;
+    background-color: #53a0e4;
+    /*color: rgba(0, 0, 0, 0.87);
+    background-color:#fa991c;*/
 }
 
 .title {

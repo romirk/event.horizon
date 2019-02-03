@@ -207,6 +207,7 @@
                 </md-input-container>
                 <md-input-container class="md-block">
                     <md-button type=submit ng-click="edit()" class="md-raised md-primary">SUBMIT</md-button>
+                    <!-- <md-button ng-click="delete()" class="md-raised md-primary" style="background-color: red; color: white">SELF DESTRUCT</md-button> -->
                 </md-input-container>
 
             </form>
@@ -268,7 +269,13 @@
                                     };
                                     $scope.edit = () => {
                                         console.log('edited', data)
-                                        $http.post('http://lvh.me:3000/event/edit/', data).then(() => {
+                                        $http.post('http://lvh.me:3000/event/edit/' + String($scope.event._id), data).then(() => {
+                                            if (res.data.success) window.location.replace('/');
+                                            else showSnack(res.data.message);
+                                        });
+                                    }
+                                    $scope.delete = () => {
+                                        $http.post('http://lvh.me:3000/event/delete/' + String($scope.event._id), data).then(() => {
                                             if (res.data.success) window.location.replace('/');
                                             else showSnack(res.data.message);
                                         });

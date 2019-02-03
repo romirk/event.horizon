@@ -39,6 +39,11 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
                     console.log(res);
                     $scope.data = res.data;
                     $scope.events = res.data.events;
+                    $scope.events.sort(function(a, b) {
+                        a = new Date(a.date);
+                        b = new Date(b.date);
+                        return a>b ? -1 : a<b ? 1 : 0;
+                    });
                     setTimeout(() => {
                         $scope.countUp('c', 0, $scope.points.c, 500);
                         $scope.countUp('e', 0, $scope.points.e, 500);
@@ -82,7 +87,7 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
             m = document.getElementById('id01');
             $scope.modEvent = search(id, $scope.events);
             var d = new Date(String($scope.modEvent.date));
-            $scope.modEvent.d =  d.getFullYear() + '.' + d.getMonth() + '.' + d.getDate();
+            $scope.modEvent.d =  d.getFullYear() + '.' + (d.getMonth() + 1) + '.' + d.getDate();
             document.getElementById('modname').innerHTML = $scope.modEvent.name;
             //document.getElementById('mreg').setAttribute('ng-click', $scope.modEvent._id);
             //document.getElementById('moddetails').innerHTML= '<span>' + d.getFullYear() + '.' + d.getMonth() + '.' + d.getDate() + '<span><p>' + $scope.modEvent.details + '</p>';
@@ -139,12 +144,13 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
                 };
                 $http.post('http://localhost:3000/event/edit/' + String(id), data).then((res) => {
                     console.log(res);
-                    if (res.data.success) window.location.reload();
+                    if (res.data.success) showSnack("Registered.");
                     else showSnack(res.data.message);
                 });
+                
             } else {
                 console.log("Already participating");
-                $window.alert("Already participating")
+                showSnack("Already participating")
             }
             
         }
@@ -240,7 +246,6 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
                             console.log(res);
                             $scope.data = res.data;
                             $scope.event = res.data.events;
-                            $scope.event.type = "holiday";
                         } else {
                             console.log(res.data.message);
                             window.location.replace('/')

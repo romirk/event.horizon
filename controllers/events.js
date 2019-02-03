@@ -96,7 +96,7 @@ router.post('/edit/:id', (req, res) => {
     })
 });
 
-router.delete('/:id', (req, res, next) => {
+router.post('delete/:id', (req, res, next) => {
     //access the parameter which is the id of the item to be deleted
     let id = req.params.id;
     console.log(`DELETE\t${id}`);
