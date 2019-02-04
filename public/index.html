@@ -28,10 +28,10 @@
                 <div class="mdl-layout-spacer"></div>
                 <!-- Navigation -->
                 <nav class="mdl-navigation">
-                    <span style='color: rgba(0, 0, 0, 0.87); position: relative; right: 3vw;'>Welcome,
+                    <span style='color: white; position: relative; right: 3vw;'>Welcome,
                         {{payload.username}}</span>
                     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"
-                        style="background-color: #032539" ng-click="logOut()">Log out</button>
+                        style="background-color: firebrick" ng-click="logOut()">Log out</button>
                 </nav>
             </div>
         </header>
@@ -74,16 +74,16 @@
                 <div class=cards>
                     <div layout="row">
                         <h2 class="md-display-2" flex="65">
-                            <code>events</code>
+                            <code style="color: white">events</code>
                         </h2>
-                        <button style="position: relative; top: 3vh; left: 17vw;background-color: #032539" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"
+                        <button style="position: relative; top: 3vh; left: 17vw;background-color: firebrick" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"
                             ng-click="newEvent()" id="ce"><i class="material-icons">add</i> Create Event </button>
                     </div>
                     <md-content class="md-padding" layout="row" layout-sm="column" layout-wrap id="cardwrap">
                         <md-card md-theme="dark-blue" ng-repeat="e in events" flex="30" flex-xs="80" flex-sm="80" id="{{e.name}}"
-                            style="background-color: #1c768f">
-                            <img ng-src="assets/imgs/eventhorizon.jpg" class="md-card-image" alt="Washed Out">
-                            <!-- <div style="height: 3vh; background-color: #032539"></div> -->
+                            style="background-color: rgb(48,167,170)">
+                            <!-- <img ng-src="assets/imgs/eventhorizon.jpg" class="md-card-image" alt="Washed Out"> -->
+                            <div style="height: 3vh; background-color: rgb(212,131,36)"></div>
                             <md-card-title>
                                 <md-card-title-text>
                                     <span class="md-headline">{{e.name}}</span>
@@ -115,7 +115,7 @@
                             </md-card-content>
                             <md-card-actions layout="row" layout-align="end center">
                                 <md-button ng-click="goEvent(e._id)">Details</md-button>
-                                <md-button class="md-accent md-raised" ng-click="register(e._id)" style="background-color: #032539">Register</md-button>
+                                <md-button class="md-accent md-raised" ng-click="register(e._id)" style="background-color: rgb(120,62,158)">Register</md-button>
                             </md-card-actions>
                         </md-card>
                     </md-content>
@@ -123,7 +123,7 @@
             </div>
         </main>
         <div id="id01" class="w3-modal">
-            <div class="w3-modal-content w3-animate-opacity" style="height: 30vh">
+            <div class="w3-modal-content w3-animate-opacity" style="height: 30vh; color: black">
 
                 <header class="w3-container w3-teal">
                     <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>

@@ -39,10 +39,10 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
                     console.log(res);
                     $scope.data = res.data;
                     $scope.events = res.data.events;
-                    $scope.events.sort(function(a, b) {
+                    $scope.events.sort(function (a, b) {
                         a = new Date(a.date);
                         b = new Date(b.date);
-                        return a>b ? -1 : a<b ? 1 : 0;
+                        return a > b ? -1 : a < b ? 1 : 0;
                     });
                     setTimeout(() => {
                         $scope.countUp('c', 0, $scope.points.c, 500);
@@ -50,6 +50,9 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
                         $scope.countUp('p', 0, $scope.points.p, 500);
                         $scope.countUp('v', 0, $scope.points.v, 500);
                     }, 1000)
+                    var eventURL = new URL(window.location);
+                    var id = encodeURI(eventURL.searchParams.get("e"));
+                    if (typeof id !== 'undefined') $scope.goEvent(id);
                 } else {
                     console.log(res.data.message);
                     document.getElementById('cardwrap').innerHTML = "<h2 style='margin:auto; text-align:center'><code style='color: #444'>no events</code></h2>";
@@ -74,7 +77,7 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
                         window.location.replace("login");
                     } else {
                         $scope.payload = res.data.payload;
-                        if($scope.payload.status != 'admin') document.getElementById('ce').setAttribute('hidden', 'true');
+                        if ($scope.payload.status != 'admin') document.getElementById('ce').setAttribute('hidden', 'true');
                     }
                 }, () => {
                     window.location.replace("login");
@@ -84,15 +87,18 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
             }
         }
         $scope.goEvent = (id) => {
+            console.log(id);
             m = document.getElementById('id01');
             $scope.modEvent = search(id, $scope.events);
             var d = new Date(String($scope.modEvent.date));
-            $scope.modEvent.d =  d.getFullYear() + '.' + (d.getMonth() + 1) + '.' + d.getDate();
+            $scope.modEvent.d = d.getFullYear() + '.' + (d.getMonth() + 1) + '.' + d.getDate();
             document.getElementById('modname').innerHTML = $scope.modEvent.name;
             //document.getElementById('mreg').setAttribute('ng-click', $scope.modEvent._id);
             //document.getElementById('moddetails').innerHTML= '<span>' + d.getFullYear() + '.' + d.getMonth() + '.' + d.getDate() + '<span><p>' + $scope.modEvent.details + '</p>';
-            m.style.display='block';
+            m.style.display = 'block';
         }
+
+
         $scope.edit = (id) => {
             console.log(id);
             window.location.replace('eventEdit.html?e=' + String(id));
@@ -134,7 +140,7 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
         $scope.register = (id) => {
             var event = search(id, $scope.events);
             console.log(event.participants, event.participants.indexOf($scope.payload.username));
-            if(event.participants.indexOf($scope.payload.username) < 0) {
+            if (event.participants.indexOf($scope.payload.username) < 0) {
                 event.participants.push($scope.payload.username);
                 console.log(event.participants);
                 var data = {
@@ -147,12 +153,12 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
                     if (res.data.success) showSnack("Registered.");
                     else showSnack(res.data.message);
                 });
-                
+
             } else {
                 console.log("Already participating");
                 showSnack("Already participating")
             }
-            
+
         }
     })
 
@@ -264,13 +270,9 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
         }
     })
     .controller("act", ($scope, $http) => {
-        
+
         $scope.goEvent = (id) => {
-            m = document.getElementById('id01');
-            $scope.modEvent = search(id, $scope.events);
-            document.getElementById('modname').innerHTML = $scope.modEvent.name;
-            document.getElementById('moddetails').innerHTML= '<span>' + $scope.modEvent.date + '<span><p>' + $scope.modEvent.details + '</p>';
-            m.style.display='block';
+            window.location.replace('/?e=' + String(id));
         }
 
         $scope.init = () => {
@@ -291,8 +293,17 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
                                     console.log(res);
                                     $scope.data = res.data;
                                     $scope.events = res.data.events;
-                                    $scope.participating = $scope.events.filter(function (el) { return el.participants.indexOf($scope.payload.username) >= 0 });
-                                    $scope.organizing = $scope.events.filter(function (el) { return el.organizers.indexOf($scope.payload.username) >= 0 });
+                                    $scope.events.sort(function (a, b) {
+                                        a = new Date(a.date);
+                                        b = new Date(b.date);
+                                        return a > b ? -1 : a < b ? 1 : 0;
+                                    });
+                                    $scope.participating = $scope.events.filter(function (el) {
+                                        return el.participants.indexOf($scope.payload.username) >= 0
+                                    });
+                                    $scope.organizing = $scope.events.filter(function (el) {
+                                        return el.organizers.indexOf($scope.payload.username) >= 0
+                                    });
                                     console.log($scope.participating, $scope.organizing);
                                 } else {
                                     console.log(res.data.message);
@@ -315,10 +326,11 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
             }
         }
     });
-    function search(id, myArray){
-        for (var i=0; i < myArray.length; i++) {
-            if (myArray[i]._id === id) {
-                return myArray[i];
-            }
+
+function search(id, myArray) {
+    for (var i = 0; i < myArray.length; i++) {
+        if (myArray[i]._id === id) {
+            return myArray[i];
         }
     }
+}

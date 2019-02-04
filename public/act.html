@@ -52,34 +52,22 @@
         <main class="mdl-layout__content" style="height:100%;">
             <div class="title" style="padding:5vh 5vw 4vw 8vh;margin:auto;display:block;/*text-align: center*/;">
                 <h1>{{payload.username}}</h1><br>
+                <span style="font-size: 60%; position: relative; bottom: 5vh">MY EVENTS</span><br>
                 <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
                         <div class="mdl-tabs__tab-bar">
-                            <a href="#participating" class="mdl-tabs__tab is-active">Participating</a>
-                            <a href="#organizing" class="mdl-tabs__tab">Organizing</a>
+                            <a href="#participating" class="mdl-tabs__tab is-active" style="color:white">Participating</a>
+                            <a href="#organizing" class="mdl-tabs__tab" style="color:white">Organizing</a>
                             
                         </div>
                       
                         <div class="mdl-tabs__panel is-active" id="participating">
                           <ul>
-                              <li ng-repeat="p in participating"><md-content><md-button ng-click="goEvent(p._id)">{{p.name}}</md-button></md-content></li>
-                              <!--
-                            <li>Eddard</li>
-                            <li>Catelyn</li>
-                            <li>Robb</li>
-                            <li>Sansa</li>
-                            <li>Brandon</li>
-                            <li>Arya</li>
-                            <li>Rickon</li>-->
+                              <li ng-repeat="p in participating"><a ng-href="/?e={{p._id}}" ng-click="goEvent(p._id)">{{p.name}}- {{p.date | date}}</a></li>
                           </ul>
                         </div>
                         <div class="mdl-tabs__panel" id="organizing">
                           <ul>
-                                <li ng-repeat="p in organizing" ng-click="goEvent(p._id)">{{p.name}}</li>
-                              <!--
-                            <li>Tywin</li>
-                            <li>Cersei</li>
-                            <li>Jamie</li>
-                            <li>Tyrion</li>-->
+                                <li ng-repeat="p in organizing" ng-click="goEvent(p._id)">{{p.name}}- {{p.date | date}}</li>
                           </ul> 
                         </div>
                         
