@@ -20,7 +20,7 @@
             <div class="mdl-layout__header-row">
                 <!-- Title -->
                 <span class="mdl-layout-title">
-                    <code style='color:inherit;background-color:inherit;font-size: 110%;'>event.horizon</code>
+                    <a href="/" style='text-decoration:none'><code style='color:inherit;background-color:inherit;font-size: 110%;'>event.horizon</code></a>
                 </span>
                 <!-- Add spacer, to align navigation to the right -->
                 <div class="mdl-layout-spacer"></div>
@@ -52,53 +52,59 @@
         <main class="mdl-layout__content" style="height:100%;">
             <div class="title" style="padding:5vh 5vw 4vw 8vh;margin:auto;display:block;/*text-align: center*/;">
                 <h1>{{payload.username}}</h1><br>
+
+
                 <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
-                        <div class="mdl-tabs__tab-bar">
-                            <a href="#participating" class="mdl-tabs__tab is-active">Participating</a>
-                            <a href="#organizing" class="mdl-tabs__tab">Organizing</a>
-                            
+                    <div class="mdl-tabs__tab-bar">
+                        <a href="#participating" class="mdl-tabs__tab is-active">Participating</a>
+                        <a href="#organizing" class="mdl-tabs__tab">Organizing</a>
+
+                    </div>
+
+                    <div class="mdl-tabs__panel is-active" id="participating">
+                        <h3>Upcoming</h3>
+                        <div id="upcoming">
+                            <ul>
+                                <li ng-repeat="p in upcoming">
+                                    <md-content>
+                                        <md-button ng-click="goEvent(p._id)">{{p.name}} {{p.date | date}}</md-button>
+                                    </md-content>
+                                </li>
+                            </ul>
                         </div>
-                      
-                        <div class="mdl-tabs__panel is-active" id="participating">
-                          <ul>
-                              <li ng-repeat="p in participating"><md-content><md-button ng-click="goEvent(p._id)">{{p.name}}</md-button></md-content></li>
-                              <!--
-                            <li>Eddard</li>
-                            <li>Catelyn</li>
-                            <li>Robb</li>
-                            <li>Sansa</li>
-                            <li>Brandon</li>
-                            <li>Arya</li>
-                            <li>Rickon</li>-->
-                          </ul>
+
+                        <h3>Completed</h3>
+                        <div id="completed">
+                            <ul>
+                                <li ng-repeat="p in completed">
+                                    <md-content>
+                                        <md-button ng-click="goEvent(p._id)">{{p.name}} {{p.date | date}}</md-button>
+                                    </md-content>
+                                </li>
+                            </ul>
                         </div>
-                        <div class="mdl-tabs__panel" id="organizing">
-                          <ul>
-                                <li ng-repeat="p in organizing" ng-click="goEvent(p._id)">{{p.name}}</li>
-                              <!--
-                            <li>Tywin</li>
-                            <li>Cersei</li>
-                            <li>Jamie</li>
-                            <li>Tyrion</li>-->
-                          </ul> 
-                        </div>
-                        
-            </div>
-    </div>
-    <div class="mdl-layout mdl-js-layout" id='2' name='2'>
-        
-    </div>
+                    </div>
+                    <div class="mdl-tabs__panel" id="organizing">
+                        <ul>
+                            <li ng-repeat="p in organizing" ng-click="goEvent(p._id)">{{p.name}} {{p.date | date}}</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mdl-layout mdl-js-layout" id='2' name='2'>
+
+                </div>
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-aria.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-messages.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-resource.js"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.min.js"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-aria.min.js"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-messages.min.js"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-resource.js"></script>
 
-    <!-- Angular Material Library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
-    <script src='app.js'></script>
+                <!-- Angular Material Library -->
+                <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
+                <script src='app.js'></script>
 </body>
 
 </html>

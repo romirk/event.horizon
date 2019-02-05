@@ -114,7 +114,7 @@
     </form>
 </div> -->
 
-<body ng-app="event.horizon" ng-controller="creator" ng-init="init()">
+<body ng-app="event.horizon" ng-controller="creator" ng-init="init()" ng-cloak>
     <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
         <div>
             <h1>Create Event</h1> <br>
@@ -161,12 +161,8 @@
                 </div> -->
 
                 <md-input-container class="md-block">
-                    <label>Address</label>
-                    <input ng-model="event.address">
-                </md-input-container>
-
-                <md-input-container md-no-float class="md-block">
-                    <input ng-model="event.address2" placeholder="Address 2">
+                    <label>Venue</label>
+                    <input ng-model="event.venue">
                 </md-input-container>
 
                 <!-- <div layout-gt-sm="row">
@@ -203,10 +199,11 @@
 
                 <md-input-container class="md-block">
                     <label>Details</label>
-                    <textarea ng-model="event.details" md-maxlength="200" rows="10" md-select-on-focus></textarea>
+                    <textarea ng-model="event.details" md-maxlength="800" rows="10" md-select-on-focus></textarea>
                 </md-input-container>
                 <md-input-container class="md-block">
                     <md-button type=submit ng-click="edit()" class="md-raised md-primary">SUBMIT</md-button>
+                    <md-button type="button" onclick="window.location.replace('index.html')" class="md-raised md-primary">BACK</md-button>
                 </md-input-container>
 
             </form>
@@ -249,6 +246,7 @@
                                         date: '',
                                         details: '',
                                         type: '',
+                                        venue: '',
                                         organizers: [$scope.payload.username]
                                     }
                                     $scope.edit = () => {

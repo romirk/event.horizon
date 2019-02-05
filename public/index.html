@@ -14,7 +14,7 @@
 
 </head>
 
-<body id="swup" ng-app="event.horizon" ng-init="init()" ng-controller="dash">
+<body id="swup" ng-app="event.horizon" ng-init="init()" ng-controller="dash" ng-cloak>
 
     <!-- Uses a transparent header that draws on top of the layout's background -->
     <div class="layout-transparent mdl-layout mdl-js-layout wrapper">
@@ -28,8 +28,8 @@
                 <div class="mdl-layout-spacer"></div>
                 <!-- Navigation -->
                 <nav class="mdl-navigation">
-                    <span style='color: rgba(0, 0, 0, 0.87); position: relative; right: 3vw;'>Welcome,
-                        {{payload.username}}</span>
+                    <a href="act.html" style="text-decoration: none"> <span style='color: rgba(0, 0, 0, 0.87); position: relative; right: 3vw;'>Welcome,
+                        {{payload.username}}</span></a>
                     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"
                         style="background-color: #032539" ng-click="logOut()">Log out</button>
                 </nav>
@@ -81,7 +81,7 @@
                     </div>
                     <md-content class="md-padding" layout="row" layout-sm="column" layout-wrap id="cardwrap">
                         <md-card md-theme="dark-blue" ng-repeat="e in events" flex="30" flex-xs="80" flex-sm="80" id="{{e.name}}"
-                            style="background-color: #1c768f">
+                            style="background-color: #1c768f; position: relative; left: 2vw">
                             <img ng-src="assets/imgs/eventhorizon.jpg" class="md-card-image" alt="Washed Out">
                             <!-- <div style="height: 3vh; background-color: #032539"></div> -->
                             <md-card-title>
@@ -115,7 +115,10 @@
                             </md-card-content>
                             <md-card-actions layout="row" layout-align="end center">
                                 <md-button ng-click="goEvent(e._id)">Details</md-button>
-                                <md-button class="md-accent md-raised" ng-click="register(e._id)" style="background-color: #032539">Register</md-button>
+
+                                <span ng-if="!e.isparticipating"><md-button class="md-accent md-raised" ng-click="register(e._id)" style="background-color: rgb(120,62,158)">Register</md-button></span>
+                                <span ng-if="e.isparticipating"><md-button class="md-accent md-raised" ng-click="deregister(e._id)" style="background-color: rgb(120,62,158)">Deregister</md-button></span>
+                                <!-- {{e.isparticipating ? <md-button class="md-accent md-raised" ng-click="deregister(e._id)" style="background-color: rgb(120,62,158)">Deregister</md-button>' : '<md-button class="md-accent md-raised" ng-click="register(e._id)" style="background-color: rgb(120,62,158)">Register</md-button>'}} -->
                             </md-card-actions>
                         </md-card>
                     </md-content>
@@ -123,7 +126,7 @@
             </div>
         </main>
         <div id="id01" class="w3-modal">
-            <div class="w3-modal-content w3-animate-opacity" style="height: 30vh">
+            <div class="w3-modal-content w3-animate-opacity" style="/*height: 30vh*/">
 
                 <header class="w3-container w3-teal">
                     <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
@@ -131,15 +134,17 @@
                 </header>
 
                 <div class="w3-container" ng-model="modEvent.name" id="moddetails">
+                    
                     <p>
-                        <b>DATE</b> {{modEvent.d}}
-                        <br> <B> TYPE</b> {{modEvent.type}}
+                        <h5>DATE</h5> {{modEvent.d}}
+                        <h5>TYPE</h5> {{modEvent.type}}
+                        <h5>VENUE</h5> {{modEvent.venue}}
                     </p>
                     <p>
-                        <B>DETAILS</B><br />
+                        <h5>DETAILS</h5>
                         {{modEvent.details}}
-                    </p>
-                    <footer class="w3-container w3-teal" style="position:relative; bottom:2vh"><span class="w3-button w3-ripple w3-display-right" ><a href="eventEdit.html?e={{modEvent._id}}">edit</a></span></footer>
+                    </p> <br><br>
+                    <footer class="w3-container w3-teal" style="position:relative; bottom:2vh"><span id="modaledit" class="w3-button w3-ripple w3-display-right" ><a href="eventEdit.html?e={{modEvent._id}}">edit</a></span></footer>
                     <!-- <md-content>
                             <md-button class="md-accent" id="mreg" ng-click="edit(modEvent._id))" id="ce">Edit</md-button>
                     </md-content> -->

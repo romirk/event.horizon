@@ -161,12 +161,8 @@
                 </div> -->
 
                 <md-input-container class="md-block">
-                    <label>Address</label>
-                    <input ng-model="event.address">
-                </md-input-container>
-
-                <md-input-container md-no-float class="md-block">
-                    <input ng-model="event.address2" placeholder="Address 2">
+                    <label>Venue</label>
+                    <input ng-model="event.venue">
                 </md-input-container>
 
                 <!-- <div layout-gt-sm="row">
@@ -203,10 +199,11 @@
 
                 <md-input-container class="md-block">
                     <label>Details</label>
-                    <textarea ng-model="event.details" md-maxlength="200" rows="10" md-select-on-focus></textarea>
+                    <textarea ng-model="event.details" md-maxlength="800" rows="10" md-select-on-focus></textarea>
                 </md-input-container>
                 <md-input-container class="md-block">
                     <md-button type=submit ng-click="edit()" class="md-raised md-primary">SUBMIT</md-button>
+                    <md-button type="button" onclick="window.location.replace('index.html')" class="md-raised md-primary">BACK</md-button>
                     <!-- <md-button ng-click="delete()" class="md-raised md-primary" style="background-color: red; color: white">SELF DESTRUCT</md-button> -->
                 </md-input-container>
 
@@ -262,7 +259,8 @@
                             } else {
 
                                 $scope.payload = res.data.payload;
-                                if ($scope.payload.status === 'admin') {
+                                console.log($scope.payload.username, $scope.event.organizers[0]);
+                                if ($scope.payload.status === 'admin' && $scope.payload.username == $scope.event.organizers[0]) {
                                     var data ={
                                         id: $scope.event._id,
                                         update: $scope.event
@@ -280,7 +278,11 @@
                                             else showSnack(res.data.message);
                                         });
                                     }
-                                } else window.location.replace("/");
+                                } else {
+                                    alert("UNAUTHARIZED");
+                                    window.location.replace("/");
+                                } 
+                                
                             }
                         }, () => {
                             window.location.replace("login");
