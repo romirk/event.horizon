@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Create Event</title>
+    <title>Edit Event</title>
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -13,116 +13,16 @@
     <script src="assets/js/swup.min.js"></script>
 
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-    <!-- <style type="text/css">
-        .form-style-8 {
-            font-family: 'Open Sans Condensed', arial, sans;
-            /*width: 500px;*/
-            padding: 30px;
-            background: #FFFFFF;
-            /*margin: 50px auto;*/
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
-            -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
-            -webkit-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
-
-        }
-
-        .form-style-8 h2 {
-            background: #4D4D4D;
-            text-transform: uppercase;
-            font-family: 'Open Sans Condensed', sans-serif;
-            color: #797979;
-            font-size: 18px;
-            font-weight: 100;
-            padding: 20px;
-            margin: -30px -30px 30px -30px;
-        }
-
-        .form-style-8 input[type="text"],
-        .form-style-8 input[type="date"],
-        .form-style-8 input[type="datetime"],
-        .form-style-8 input[type="email"],
-        .form-style-8 input[type="number"],
-        .form-style-8 input[type="search"],
-        .form-style-8 input[type="time"],
-        .form-style-8 input[type="url"],
-        .form-style-8 input[type="password"],
-        .form-style-8 textarea,
-        .form-style-8 select {
-            box-sizing: border-box;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            outline: none;
-            display: block;
-            width: 100%;
-            padding: 7px;
-            border: none;
-            border-bottom: 1px solid #ddd;
-            background: transparent;
-            margin-bottom: 10px;
-            font: 16px Arial, Helvetica, sans-serif;
-            height: 45px;
-        }
-
-        .form-style-8 textarea {
-            resize: none;
-            overflow: hidden;
-        }
-
-        .form-style-8 input[type="button"],
-        .form-style-8 input[type="submit"] {
-            -moz-box-shadow: inset 0px 1px 0px 0px #ff4081;
-            -webkit-box-shadow: inset 0px 1px 0px 0px #ff4081;
-            box-shadow: inset 0px 1px 0px 0px #ff4081;
-            background-color: #ff4081;
-            border: 1px solid #ff4081;
-            display: inline-block;
-            cursor: pointer;
-            color: #FFFFFF;
-            font-family: 'Open Sans Condensed', sans-serif;
-            font-size: 14px;
-            padding: 8px 18px;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .form-style-8 input[type="button"]:hover,
-        .form-style-8 input[type="submit"]:hover {
-            background: linear-gradient(to bottom, #ff4081 5%, #ff4081 100%);
-            background-color: #ff4081;
-        }
+    <style>
+        md-content { height: 100% }
     </style>
-
-    <script type="text/javascript">
-        //auto expand textarea
-        function adjust_textarea(h) {
-            h.style.height = "20px";
-            h.style.height = (h.scrollHeight) + "px";
-        }
-    </script>
-
-
 </head>
-
-<div class="form-style-8">
-    <h2>Create an event</h2>
-    <form>
-        <input type="text" name="field1" placeholder="Event Title" />
-        <input type="date" name="field2" placeholder="Date" />
-        <input type="text" name="field3" placeholder="Venue" />
-        <textarea placeholder="Details" onkeyup="adjust_textarea(this)"></textarea>
-        <input type="button" value="Create Event" />
-    </form>
-</div> -->
-
 <body ng-app="event.horizon" ng-controller="creator" ng-init="init()">
     <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
         <div>
             <h1>Edit Event</h1> <br>
         </div>
 
-        <!-- </md-content>
-
-    <md-content layout-padding> -->
         <div>
             <form name="eventForm">
                 <div>
@@ -147,18 +47,6 @@
                         <md-datepicker ng-model="event.date"></md-datepicker>
                     </md-input-container>
                 </div>
-
-                <!-- <div layout-gt-sm="row">
-                    <md-input-container class="md-block" flex-gt-sm>
-                        <label>First name</label>
-                        <input ng-model="event.firstName">
-                    </md-input-container>
-
-                    <md-input-container class="md-block" flex-gt-sm>
-                        <label>Long Last Name That Will Be Truncated And 3 Dots (Ellipsis) Will Appear At The End</label>
-                        <input ng-model="theMax">
-                    </md-input-container>
-                </div> -->
 
                 <md-input-container class="md-block">
                     <label>Venue</label>
@@ -204,7 +92,7 @@
                 <md-input-container class="md-block">
                     <md-button type=submit ng-click="edit()" class="md-raised md-primary">SUBMIT</md-button>
                     <md-button type="button" onclick="window.location.replace('index.html')" class="md-raised md-primary">BACK</md-button>
-                    <!-- <md-button ng-click="delete()" class="md-raised md-primary" style="background-color: red; color: white">SELF DESTRUCT</md-button> -->
+                    <md-button ng-click="delete()" class="md-raised md-primary" style="background-color: red; color: white">Delete</md-button>
                 </md-input-container>
 
             </form>
@@ -273,13 +161,13 @@
                                         });
                                     }
                                     $scope.delete = () => {
-                                        $http.post('http://lvh.me:3000/event/delete/' + String($scope.event._id), data).then(() => {
+                                        $http.get('http://lvh.me:3000/event/delete/' + String($scope.event._id)).then(() => {
                                             if (res.data.success) window.location.replace('/');
                                             else showSnack(res.data.message);
                                         });
                                     }
                                 } else {
-                                    alert("UNAUTHARIZED");
+                                    alert("UNAUTHORIZED");
                                     window.location.replace("/");
                                 } 
                                 

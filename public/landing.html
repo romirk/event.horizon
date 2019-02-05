@@ -2,47 +2,43 @@
 <html>
 
 <head>
+    <title>event.horizon</title>
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        body,
         html {
-            height: 100%;
-        }
-
-        .screenImage {
             background-image: url("assets/imgs/polygon2.png");
             /* Set a specific height */
-            height: 100%;
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
-            position: relative;
+            padding: auto;
         }
+        html, body {margin: 0; height: 100%; overflow: hidden}
+
 
         /* Place text in the middle of the image */
 
         .screenText {
+            position: relative;
+            top: 36vh;
             text-align: center;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: grey;
+            margin: auto;
         }
     </style>
 </head>
 
 <body>
-    <div class="screenImage">
-        <div class="screenText">
-            <h1><code>welcome to event.horizon</code></h1>
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick='window.location.replace("login.html")'>Login</button>
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick='window.location.replace("reg.html")'> Register</button>
-        </div>
+
+    <div class="screenText">
+        <h1><code>welcome to event.horizon</code></h1>
+        <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent mdl-button--raised mdl-color--grey-600"
+            onclick='window.location.replace("login.html")' style="font-size: 120%">Login</button>
+        <button class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick='window.location.replace("reg.html")'
+            style="font-size: 120%"> Register</button>
     </div>
 
 </body>

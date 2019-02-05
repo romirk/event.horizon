@@ -90,7 +90,7 @@
           <p></p>
           <!-- <input type="submit" name="submit" value="Register" class="btn btn-success btn-block d" /> -->
           <button ng-click="reg()" type="submit" value="Register" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">Register</button>
-          <button class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--accent" onclick='window.location.replace("/")'>CANCEL</button>
+          <button class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--accent" ng-click="cancel()">CANCEL</button>
         </form>
       </div>
     </div>
@@ -154,6 +154,7 @@
         } else showSnack("Passwords don't match");
 
       }
+      $scope.cancel = () => window.location.replace('landing');
     }); 
 </script>
 

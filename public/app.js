@@ -42,7 +42,7 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
                 }).then((res) => {
                     if (!res.data.success) {
                         localStorage.removeItem('jwt');
-                        window.location.replace("login");
+                        window.location.replace("landing");
                     } else {
                         $scope.payload = res.data.payload;
                         if ($scope.payload.status != 'admin') {
@@ -75,6 +75,14 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
                                             }
                                         }
                                     }
+                                    for (var i = 0; i < $scope.events.length; i++) {
+                                        // console.log($scope.events[i]);
+                                        var d = new Date($scope.events[i].date);
+                                            if (d < Date.now() - 3*3600*24) {
+                                                $scope.events.splice(i,1);
+                                                i--;
+                                            }
+                                    }
 
                                     var eventURL = new URL(window.location);
                                     var e = encodeURI(eventURL.searchParams.get("e"));
@@ -93,10 +101,10 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
                         )
                     }
                 }, () => {
-                    window.location.replace("login");
+                    window.location.replace("landing");
                 });
             else {
-                window.location.replace("login");
+                window.location.replace("landing");
             }
         }
         $scope.goEvent = (id) => {
@@ -163,7 +171,7 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
 
         $scope.logOut = () => {
             localStorage.removeItem('jwt');
-            window.location.replace("login");
+            window.location.replace("landing");
         }
         $scope.newEvent = () => window.location.replace("eventForm.html");
 
@@ -203,7 +211,7 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
             };
             $http.post('http://localhost:3000/event/edit/' + String(id), data).then((res) => {
                 console.log(res);
-                if (res.data.success) showSnack("Deregistered.");
+                if (res.data.success) showSnack("Unregistered.");
                 else showSnack(res.data.message);
                 $scope.init();
             });
@@ -226,7 +234,7 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
 
                     if (!res.data.success) {
                         localStorage.removeItem('jwt');
-                        window.location.replace("login");
+                        window.location.replace("landing");
                     } else {
 
                         $scope.payload = res.data.payload;
@@ -286,10 +294,10 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
                         } else document.getElementById('edit-btn').setAttribute('style', 'display: none');
                     }
                 }, () => {
-                    window.location.replace("login");
+                    window.location.replace("landing");
                 });
             else {
-                window.location.replace("login");
+                window.location.replace("landing");
             }
 
             if (id != 'new') {
@@ -314,7 +322,7 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
 
         $scope.logOut = () => {
             localStorage.removeItem('jwt');
-            window.location.replace("login");
+            window.location.replace("landing");
         }
     })
     .controller("act", ($scope, $http) => {
@@ -335,14 +343,14 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
                 }).then((res) => {
                     if (!res.data.success) {
                         localStorage.removeItem('jwt');
-                        window.location.replace("login");
+                        window.location.replace("landing");
                     } else {
                         $scope.payload = res.data.payload;
-                        if($scope.payload.status != 'admin') document.getElementById("organizing").innerHTML = "Sorry Bruh. Not an admin."
+                        if($scope.payload.status != 'admin') document.getElementById("organizing").innerHTML = "Sorry, you are not an organizer";
                         $http.get("http://lvh.me:3000/event/").then(
                             (res) => {
                                 if (res.data.success) {
-                                    if (res.data.events.length == 0) document.getElementById('cardwrap').innerHTML = "<h2 style='margin:auto; text-align:center'><code style='color: #444'>no events</code></h2>";
+                                    if (res.data.events.length == 0) document.getElementById('cardwrap').innerHTML = "<h2 style='margin:auto; text-align:center'><code style='color: #444'>No events</code></h2>";
                                     console.log(res);
                                     $scope.data = res.data;
                                     $scope.events = res.data.events;
@@ -376,19 +384,19 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
                                         }
                                     }
                                     if ($scope.upcomingP.length == 0) {
-                                        document.getElementById("upcomingP").innerHTML = "<h4 style='position:relative; left: 4vw'>no events</h4>";
+                                        document.getElementById("upcomingP").innerHTML = "<h4 style='position:relative; left: 4vw'>No events</h4>";
                                     }
                                     if ($scope.completedP.length == 0) {
-                                        document.getElementById("completedP").innerHTML = "<h4 style='position:relative; left: 4vw'><span style='color: #444'>no events</span></h4>";
+                                        document.getElementById("completedP").innerHTML = "<h4 style='position:relative; left: 4vw'><span style='color: #444'>No events</span></h4>";
                                     }
-                                    if ($scope.upcomingO.length == 0) {
-                                        document.getElementById("upcomingO").innerHTML = "<h4 style='position:relative; left: 4vw'>no events</h4>";
+                                    if ($scope.payload.status == 'admin' && $scope.upcomingO.length == 0) {
+                                        document.getElementById("upcomingO").innerHTML = "<h4 style='position:relative; left: 4vw'>No events</h4>";
                                     }
-                                    if ($scope.completedO.length == 0) {
-                                        document.getElementById("completedO").innerHTML = "<h4 style='position:relative; left: 4vw'><span style='color: #444'>no events</span></h4>";
+                                    if ($scope.payload.status == 'admin' && $scope.completedO.length == 0) {
+                                        document.getElementById("completedO").innerHTML = "<h4 style='position:relative; left: 4vw'><span style='color: #444'>No events</span></h4>";
                                     }
 
-                                    console.log($scope.participating, $scope.organizing, $scope.upcoming);
+                                    console.log($scope.participating, '1',$scope.organizing, '2', $scope.upcomingP, $scope.completedP);
                                 } else {
                                     console.log(res.data.message);
                                     //document.getElementById('cardwrap').innerHTML = "<h2 style='margin:auto; text-align:center'><code style='color: #444'>no events</code></h2>";
@@ -403,10 +411,10 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
                         );
                     }
                 }, () => {
-                    window.location.replace("login");
+                    window.location.replace("landing");
                 });
             else {
-                window.location.replace("login");
+                window.location.replace("landing");
             }
         }
         
@@ -444,7 +452,7 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
     
         $scope.logOut = () => {
             localStorage.removeItem('jwt');
-            window.location.replace("login");
+            window.location.replace("landing");
         }
     });
 

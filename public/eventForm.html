@@ -13,116 +13,15 @@
     <script src="assets/js/swup.min.js"></script>
 
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-    <!-- <style type="text/css">
-        .form-style-8 {
-            font-family: 'Open Sans Condensed', arial, sans;
-            /*width: 500px;*/
-            padding: 30px;
-            background: #FFFFFF;
-            /*margin: 50px auto;*/
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
-            -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
-            -webkit-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
-
-        }
-
-        .form-style-8 h2 {
-            background: #4D4D4D;
-            text-transform: uppercase;
-            font-family: 'Open Sans Condensed', sans-serif;
-            color: #797979;
-            font-size: 18px;
-            font-weight: 100;
-            padding: 20px;
-            margin: -30px -30px 30px -30px;
-        }
-
-        .form-style-8 input[type="text"],
-        .form-style-8 input[type="date"],
-        .form-style-8 input[type="datetime"],
-        .form-style-8 input[type="email"],
-        .form-style-8 input[type="number"],
-        .form-style-8 input[type="search"],
-        .form-style-8 input[type="time"],
-        .form-style-8 input[type="url"],
-        .form-style-8 input[type="password"],
-        .form-style-8 textarea,
-        .form-style-8 select {
-            box-sizing: border-box;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            outline: none;
-            display: block;
-            width: 100%;
-            padding: 7px;
-            border: none;
-            border-bottom: 1px solid #ddd;
-            background: transparent;
-            margin-bottom: 10px;
-            font: 16px Arial, Helvetica, sans-serif;
-            height: 45px;
-        }
-
-        .form-style-8 textarea {
-            resize: none;
-            overflow: hidden;
-        }
-
-        .form-style-8 input[type="button"],
-        .form-style-8 input[type="submit"] {
-            -moz-box-shadow: inset 0px 1px 0px 0px #ff4081;
-            -webkit-box-shadow: inset 0px 1px 0px 0px #ff4081;
-            box-shadow: inset 0px 1px 0px 0px #ff4081;
-            background-color: #ff4081;
-            border: 1px solid #ff4081;
-            display: inline-block;
-            cursor: pointer;
-            color: #FFFFFF;
-            font-family: 'Open Sans Condensed', sans-serif;
-            font-size: 14px;
-            padding: 8px 18px;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .form-style-8 input[type="button"]:hover,
-        .form-style-8 input[type="submit"]:hover {
-            background: linear-gradient(to bottom, #ff4081 5%, #ff4081 100%);
-            background-color: #ff4081;
-        }
+    <style>
+        md-content { height: 100% }
     </style>
-
-    <script type="text/javascript">
-        //auto expand textarea
-        function adjust_textarea(h) {
-            h.style.height = "20px";
-            h.style.height = (h.scrollHeight) + "px";
-        }
-    </script>
-
-
 </head>
-
-<div class="form-style-8">
-    <h2>Create an event</h2>
-    <form>
-        <input type="text" name="field1" placeholder="Event Title" />
-        <input type="date" name="field2" placeholder="Date" />
-        <input type="text" name="field3" placeholder="Venue" />
-        <textarea placeholder="Details" onkeyup="adjust_textarea(this)"></textarea>
-        <input type="button" value="Create Event" />
-    </form>
-</div> -->
-
 <body ng-app="event.horizon" ng-controller="creator" ng-init="init()" ng-cloak>
     <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
         <div>
             <h1>Create Event</h1> <br>
         </div>
-
-        <!-- </md-content>
-
-    <md-content layout-padding> -->
         <div>
             <form name="eventForm">
                 <div>
@@ -130,11 +29,6 @@
                         <label>Name</label>
                         <input ng-model="event.name">
                     </md-input-container>
-
-                    <!-- <md-input-container>
-                <label>Email</label>
-                <input ng-model="event.email" type="email">
-            </md-input-container> -->
                 </div>
                 <div layout-gt-xs="row">
                     <md-input-container class="md-block" flex-gt-xs>
@@ -148,54 +42,10 @@
                     </md-input-container>
                 </div>
 
-                <!-- <div layout-gt-sm="row">
-                    <md-input-container class="md-block" flex-gt-sm>
-                        <label>First name</label>
-                        <input ng-model="event.firstName">
-                    </md-input-container>
-
-                    <md-input-container class="md-block" flex-gt-sm>
-                        <label>Long Last Name That Will Be Truncated And 3 Dots (Ellipsis) Will Appear At The End</label>
-                        <input ng-model="theMax">
-                    </md-input-container>
-                </div> -->
-
                 <md-input-container class="md-block">
                     <label>Venue</label>
                     <input ng-model="event.venue">
                 </md-input-container>
-
-                <!-- <div layout-gt-sm="row">
-                    <md-input-container class="md-block" flex-gt-sm>
-                        <label>City</label>
-                        <input ng-model="event.city">
-                    </md-input-container>
-
-                    <md-input-container class="md-block" flex-gt-sm>
-                        <label>State</label>
-                        <md-select ng-model="event.grade">
-                            <md-option ng-repeat="grade in grades" value="{{grade.abbrev}}">
-                                {{state.abbrev}}
-                            </md-option>
-                        </md-select>
-                    </md-input-container>
-
-                    <md-input-container class="md-block" flex-gt-sm>
-                        <label>Postal Code</label>
-                        <input name="postalCode" ng-model="event.postalCode" placeholder="12345" required ng-pattern="/^[0-9]{5}$/"
-                            md-maxlength="5">
-
-                        <div ng-messages="eventForm.postalCode.$error" role="alert" multiple>
-                            <div ng-message="required" class="my-message">You must supply a postal code.</div>
-                            <div ng-message="pattern" class="my-message">That doesn't look like a valid postal
-                                code.
-                            </div>
-                            <div ng-message="md-maxlength" class="my-message">
-                                Don't use the long version silly...we don't need to be that specific...
-                            </div>
-                        </div>
-                    </md-input-container>
-                </div> -->
 
                 <md-input-container class="md-block">
                     <label>Details</label>
