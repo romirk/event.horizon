@@ -101,6 +101,7 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
         }
         $scope.goEvent = (id) => {
             console.log(id);
+
             m = document.getElementById('id01');
             $scope.modEvent = search(id, $scope.events);
             var d = new Date(String($scope.modEvent.date));
@@ -108,6 +109,15 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
             document.getElementById('modname').innerHTML = $scope.modEvent.name;
             //document.getElementById('mreg').setAttribute('ng-click', $scope.modEvent._id);
             //document.getElementById('moddetails').innerHTML= '<span>' + d.getFullYear() + '.' + d.getMonth() + '.' + d.getDate() + '<span><p>' + $scope.modEvent.details + '</p>';
+            $http.get("http://lvh.me:3000/user/"+ $scope.modEvent.organizers[0]).then(
+                (res) => {
+                    if (res.data.success) {
+                        $scope.name = res.data.user.name;
+                        $scope.grade = res.data.user.grade;
+                        $scope.sec = res.data.user.sec;
+                        //console.log(res.data);
+                    }
+            });
             m.style.display = 'block';
         }
 
@@ -343,31 +353,39 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
                                     });
                                     $scope.participating = $scope.events.filter(function (el) { return el.participants.indexOf($scope.payload.username) >= 0 });
                                     $scope.organizing = $scope.events.filter(function (el) { return el.organizers.indexOf($scope.payload.username) >= 0 });
-                                    $scope.upcoming = [];
-                                    $scope.completed = [];
+                                    $scope.upcomingP = [];
+                                    $scope.completedP = [];
+                                    $scope.upcomingO = [];
+                                    $scope.completedO = [];
                                     for (var i = 0; i < $scope.participating.length; i++) {
                                         var date = new Date($scope.participating[i].date);
                                         if (date >= Date.now()) {
-                                            $scope.upcoming.push($scope.participating[i]);
+                                            $scope.upcomingP.push($scope.participating[i]);
                                         }
                                         else {
-                                            $scope.completed.push($scope.participating[i]);
+                                            $scope.completedP.push($scope.participating[i]);
                                         }
                                     }
                                     for (var i = 0; i < $scope.organizing.length; i++) {
                                         var date = new Date($scope.organizing[i].date);
                                         if (date >= Date.now()) {
-                                            $scope.upcoming.push($scope.organizing[i]);
+                                            $scope.upcomingO.push($scope.organizing[i]);
                                         }
                                         else {
-                                            $scope.completed.push($scope.participating[i]);
+                                            $scope.completedO.push($scope.organizing[i]);
                                         }
                                     }
-                                    if ($scope.upcoming.length == 0) {
-                                        document.getElementById("upcoming").innerHTML = "<h4 style='position:relative; left: 4vw'>no events</h4>";
+                                    if ($scope.upcomingP.length == 0) {
+                                        document.getElementById("upcomingP").innerHTML = "<h4 style='position:relative; left: 4vw'>no events</h4>";
                                     }
-                                    if ($scope.completed.length == 0) {
-                                        document.getElementById("completed").innerHTML = "<h4 style='position:relative; left: 4vw'><span style='color: #444'>no events</span></h4>";
+                                    if ($scope.completedP.length == 0) {
+                                        document.getElementById("completedP").innerHTML = "<h4 style='position:relative; left: 4vw'><span style='color: #444'>no events</span></h4>";
+                                    }
+                                    if ($scope.upcomingO.length == 0) {
+                                        document.getElementById("upcomingO").innerHTML = "<h4 style='position:relative; left: 4vw'>no events</h4>";
+                                    }
+                                    if ($scope.completedO.length == 0) {
+                                        document.getElementById("completedO").innerHTML = "<h4 style='position:relative; left: 4vw'><span style='color: #444'>no events</span></h4>";
                                     }
 
                                     console.log($scope.participating, $scope.organizing, $scope.upcoming);
@@ -390,6 +408,38 @@ app.config(['$mdIconProvider', function ($mdIconProvider) {
             else {
                 window.location.replace("login");
             }
+        }
+        
+        $scope.parti = (eventC) => {
+
+            m = document.getElementById('id02');
+
+            $http.get("http://lvh.me:3000/event/"+ eventC).then(
+                (res) => {
+                    console.log("hi1:", res.data);
+                    if (res.data.success) {
+                        $scope.part = res.data.events.participants;
+                        console.log("hi2:",$scope.part.length);
+                    }
+                });
+
+            
+            $http.get("http://lvh.me:3000/user").then(
+                (res) => {
+                    if (res.data.success) {
+                        $scope.participant_names = [];
+                        for(var i=0; i < res.data.users.length; i++) {
+                            for(var j=0; j < $scope.part.length; j++){
+                                //console.log(res.data.users[i], $scope.part[j]);
+                                if(res.data.users[i].username == $scope.part[j])
+                                    $scope.participant_names.push(res.data.users[i].name);    
+                            }    
+                        }
+                    }
+                });
+            
+            m.style.display = 'block';
+
         }
     
         $scope.logOut = () => {

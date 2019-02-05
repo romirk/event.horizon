@@ -63,31 +63,74 @@
 
                     <div class="mdl-tabs__panel is-active" id="participating">
                         <h3>Upcoming</h3>
-                        <div id="upcoming">
+                        <div id="upcomingP">
                             <ul>
-                                <li ng-repeat="p in upcoming">
+                                <li ng-repeat="p in upcomingP">
                                     <md-content>
-                                        <md-button ng-click="goEvent(p._id)">{{p.name}} {{p.date | date}}</md-button>
+                                        <md-button ng-click="goEvent(p._id)">{{p.name}} | {{p.date | date}}</md-button>
                                     </md-content>
                                 </li>
                             </ul>
                         </div>
 
                         <h3>Completed</h3>
-                        <div id="completed">
+                        <div id="completedP">
                             <ul>
-                                <li ng-repeat="p in completed">
+                                <li ng-repeat="p in completedO">
                                     <md-content>
-                                        <md-button ng-click="goEvent(p._id)">{{p.name}} {{p.date | date}}</md-button>
+                                        <md-button ng-click="goEvent(p._id)">{{p.name}} | {{p.date | date}}</md-button>
                                     </md-content>
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div class="mdl-tabs__panel" id="organizing">
-                        <ul>
-                            <li ng-repeat="p in organizing" ng-click="goEvent(p._id)">{{p.name}} {{p.date | date}}</li>
-                        </ul>
+                        <h3>Upcoming</h3>
+                        <div id="upcomingO">
+                            <ul>
+                                <li ng-repeat="p in upcomingO">
+                                    <md-content>
+                                        <md-button ng-click="goEvent(p._id)">{{p.name}} | {{p.date | date}}</md-button>
+                                        <md-button type="button" ng-click="parti(p._id)" class="md-raised md-primary">Participants</md-button>
+                                    </md-content>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <h3>Completed</h3>
+                        <div id="completedO">
+                            <ul>
+                                <li ng-repeat="p in completedO">
+                                    <md-content>
+                                        <md-button ng-click="goEvent(p._id)">{{p.name}} | {{p.date | date}}</md-button>
+                                    </md-content>
+                                </li>
+                            </ul>
+                        </div>
+                </div>
+
+
+                <div id="id02" class="w3-modal">
+                    <div class="w3-modal-content w3-animate-opacity" style="/*height: 30vh*/">
+        
+                        <header class="w3-container w3-teal">
+                            <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                            <h2 id="modname"> Participants <!--{{modEvent.name}}--></h2>          
+                        </header>
+        
+                        <div class="w3-container" id="moddetails">
+                            <b>Number of Participants: </b> {{participant_names.length}}
+                            <ul>
+                                <li ng-repeat="name in participant_names">
+                                    {{name}}    
+                                </li>
+                            </ul>
+                            
+
+                            <footer class="w3-container w3-teal" style="position:relative; bottom:2vh"></footer>
+                        </div>
+                            
+        
                     </div>
                 </div>
 

@@ -93,11 +93,11 @@
     <script>
         var app = angular.module('event.horizon.login', ['ngMaterial', 'ngMessages', 'ngCookies']);
 
-        function showSnack(msg) {
+        function showSnack(msg, time) {
             var snackbarContainer = document.querySelector('#snackbar');
             var data = {
                 message: msg,
-                timeout: 2000
+                timeout: time,
             };
             snackbarContainer.MaterialSnackbar.showSnackbar(data);
         }
@@ -109,6 +109,7 @@
             })
             .controller('login', function ($scope, $http, $cookies, $mdToast) {
                 $scope.auth = () => {
+                    //showSnack("Loading", 50000)
                     var data = {
                         username: $scope.username,
                         password: $scope.password
@@ -128,7 +129,7 @@
                                 setTimeout(() => {window.location.reload()}, 2500);
                             }
                         }, (err) => {
-                            showSnack("Server unavailable.")
+                            showSnack("Server unavailable.", 2000)
                         });
                 }
 
