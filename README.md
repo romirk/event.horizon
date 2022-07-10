@@ -1,4 +1,6 @@
 # cisco-npskrm
+This repository is now archived.
+
 ## API
 ### ```GET /user/:username```
 
